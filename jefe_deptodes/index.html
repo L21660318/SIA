@@ -276,6 +276,101 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
+/* Nuevos estilos para mejoras visuales */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0;
+}
+
+.info-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.action-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.action-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.action-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+/* Estilos para lista desplegable de informes */
+.report-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.report-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.report-item:hover {
+    background-color: #f8f9fa;
+}
+
+.report-item:last-child {
+    border-bottom: none;
+}
+
+.report-info {
+    flex: 1;
+}
+
+.report-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .main-container {
@@ -288,6 +383,16 @@ body {
     
     .search-box {
         margin-bottom: 1rem;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .report-actions {
+        flex-direction: column;
     }
 }
 </style>
@@ -361,97 +466,102 @@ body {
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Panel del Jefe de Desarrollo Académico</h2>
+        <!-- Encabezado de página con botón de acciones rápidas -->
+        <div class="page-header">
+            <h1 class="page-title">Panel del Jefe de Desarrollo Académico</h1>
             <div class="d-flex">
                 <div class="search-box me-3">
                     <input type="text" class="form-control" placeholder="Buscar...">
                     <i class="bi bi-search"></i>
                 </div>
-                <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
-                    <i class="bi bi-lightning-fill me-1"></i> Acciones rápidas
+                <button class="btn btn-primary-custom btn-lg" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                    <i class="bi bi-lightning-fill me-2"></i> Acciones rápidas
                 </button>
             </div>
         </div>
 
         <!-- Tarjetas principales -->
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-megaphone-fill"></i></div>
-                    <h5 class="card-title">Difusión y Promoción</h5>
-                    <p class="card-text">
-                        Difunde y promueve el desarrollo del PIT a nivel institucional.
-                    </p>
-                    <div class="mt-3">
-                        <span class="badge bg-primary me-1">3 Campañas Activas</span>
-                        <span class="badge bg-success">85% Cobertura</span>
-                    </div>
-                    <button class="btn btn-sm btn-outline-primary mt-2">Gestionar Campañas</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-diagram-3"></i></div>
-                    <h5 class="card-title">Estrategias para Tutores</h5>
-                    <p class="card-text">
-                        Genera estrategias para sensibilización, formación y captación de tutores.
-                    </p>
-                    <div class="progress mt-3" style="height: 8px;">
-                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <small class="text-muted">70% de estrategias implementadas</small>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-file-bar-graph"></i></div>
-                    <h5 class="card-title">Informes Semestrales</h5>
-                    <p class="card-text">
-                        Entrega informes semestrales al Subdirector Académico con resultados y metas.
-                    </p>
-                    <div class="mt-3">
-                        <span class="status-pending"><i class="bi bi-clock-history me-1"></i> 2 Pendientes</span>
+        <div class="info-section">
+            <h3 class="section-title">Funciones Principales</h3>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-megaphone-fill"></i></div>
+                        <h5 class="card-title">Difusión y Promoción</h5>
+                        <p class="card-text">
+                            Difunde y promueve el desarrollo del PIT a nivel institucional.
+                        </p>
+                        <div class="mt-3">
+                            <span class="badge bg-primary me-1">3 Campañas Activas</span>
+                            <span class="badge bg-success">85% Cobertura</span>
+                        </div>
+                        <button class="btn btn-sm btn-outline-primary mt-2">Gestionar Campañas</button>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-bullseye"></i></div>
-                    <h5 class="card-title">Establecimiento de Metas</h5>
-                    <p class="card-text">
-                        Establece nuevas metas y estrategias para el mejoramiento del PIT.
-                    </p>
-                    <button class="btn btn-sm btn-outline-primary mt-2">Definir Metas</button>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-file-check"></i></div>
-                    <h5 class="card-title">Constancias a Tutores</h5>
-                    <p class="card-text">
-                        Expide constancias semestrales de cumplimiento a los tutores.
-                    </p>
-                    <div class="mt-3">
-                        <span class="status-overdue"><i class="bi bi-exclamation-triangle me-1"></i> 45 Pendientes</span>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-diagram-3"></i></div>
+                        <h5 class="card-title">Estrategias para Tutores</h5>
+                        <p class="card-text">
+                            Genera estrategias para sensibilización, formación y captación de tutores.
+                        </p>
+                        <div class="progress mt-3" style="height: 8px;">
+                            <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <small class="text-muted">70% de estrategias implementadas</small>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="dashboard-card">
-                    <div class="card-icon"><i class="bi bi-person-check"></i></div>
-                    <h5 class="card-title">Constancias a Estudiantes</h5>
-                    <p class="card-text">
-                        Expide constancias de cumplimiento a los estudiantes en el PIT.
-                    </p>
-                    <button class="btn btn-sm btn-outline-primary mt-2">Generar Lote</button>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-file-bar-graph"></i></div>
+                        <h5 class="card-title">Informes Semestrales</h5>
+                        <p class="card-text">
+                            Entrega informes semestrales al Subdirector Académico con resultados y metas.
+                        </p>
+                        <div class="mt-3">
+                            <span class="status-pending"><i class="bi bi-clock-history me-1"></i> 2 Pendientes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-bullseye"></i></div>
+                        <h5 class="card-title">Establecimiento de Metas</h5>
+                        <p class="card-text">
+                            Establece nuevas metas y estrategias para el mejoramiento del PIT.
+                        </p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">Definir Metas</button>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-file-check"></i></div>
+                        <h5 class="card-title">Constancias a Tutores</h5>
+                        <p class="card-text">
+                            Expide constancias semestrales de cumplimiento a los tutores.
+                        </p>
+                        <div class="mt-3">
+                            <span class="status-overdue"><i class="bi bi-exclamation-triangle me-1"></i> 45 Pendientes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="dashboard-card">
+                        <div class="card-icon"><i class="bi bi-person-check"></i></div>
+                        <h5 class="card-title">Constancias a Estudiantes</h5>
+                        <p class="card-text">
+                            Expide constancias de cumplimiento a los estudiantes en el PIT.
+                        </p>
+                        <button class="btn btn-sm btn-outline-primary mt-2">Generar Lote</button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Estadísticas institucionales -->
-        <div class="row mt-5 g-4">
-            <div class="col-md-3 col-6">
+        <div class="info-section">
+            <h3 class="section-title">Estadísticas Institucionales</h3>
+            <div class="stats-grid">
                 <div class="dashboard-card text-center">
                     <div class="stats-number">156</div>
                     <div class="stats-label">Tutores Activos</div>
@@ -459,8 +569,6 @@ body {
                         <span class="badge bg-success">+12% vs anterior</span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
                 <div class="dashboard-card text-center">
                     <div class="stats-number">1,240</div>
                     <div class="stats-label">Estudiantes Atendidos</div>
@@ -468,8 +576,6 @@ body {
                         <span class="badge bg-info">92% Cobertura</span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
                 <div class="dashboard-card text-center">
                     <div class="stats-number">88%</div>
                     <div class="stats-label">Cumplimiento PIT</div>
@@ -477,8 +583,6 @@ body {
                         <span class="badge bg-success">Meta: 85%</span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-6">
                 <div class="dashboard-card text-center">
                     <div class="stats-number">8</div>
                     <div class="stats-label">Programas Educativos</div>
@@ -490,331 +594,323 @@ body {
         </div>
 
         <!-- Estrategias y métricas -->
-        <div class="row mt-5 g-4">
-            <div class="col-lg-8">
-                <div class="dashboard-card">
-                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                        <span>Estrategias de Captación y Formación de Tutores</span>
-                        <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#strategyModal">
-                            <i class="bi bi-plus-circle me-1"></i> Nueva Estrategia
-                        </button>
-                    </h5>
-                    
-                    <div class="strategy-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-warning mb-0">Programa de Sensibilización</h6>
-                            <span class="badge bg-warning text-dark">En Ejecución</span>
-                        </div>
-                        <p class="mb-2"><strong>Objetivo:</strong> Incrementar en 15% la participación de profesores como tutores</p>
-                        <p class="mb-2"><strong>Alcance:</strong> Todos los departamentos académicos</p>
-                        <div class="progress mb-2" style="height: 8px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="text-muted">65% completado</small>
-                            <div>
-                                <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                <button class="btn btn-sm btn-outline-success">Reporte</button>
+        <div class="info-section">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="dashboard-card">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            <span>Estrategias de Captación y Formación de Tutores</span>
+                            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#strategyModal">
+                                <i class="bi bi-plus-circle me-1"></i> Nueva Estrategia
+                            </button>
+                        </h5>
+                        
+                        <div class="strategy-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-warning mb-0">Programa de Sensibilización</h6>
+                                <span class="badge bg-warning text-dark">En Ejecución</span>
+                            </div>
+                            <p class="mb-2"><strong>Objetivo:</strong> Incrementar en 15% la participación de profesores como tutores</p>
+                            <p class="mb-2"><strong>Alcance:</strong> Todos los departamentos académicos</p>
+                            <div class="progress mb-2" style="height: 8px;">
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">65% completado</small>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-success">Reporte</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="strategy-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-success mb-0">Capacitación Continua</h6>
-                            <span class="badge bg-success">Completado</span>
-                        </div>
-                        <p class="mb-2"><strong>Objetivo:</strong> Certificar a 50 tutores en nuevas metodologías</p>
-                        <p class="mb-2"><strong>Alcance:</strong> Tutores activos y nuevos</p>
-                        <div class="progress mb-2" style="height: 8px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="text-muted">52 tutores certificados</small>
-                            <div>
-                                <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                <button class="btn btn-sm btn-outline-success">Reporte</button>
+                        <div class="strategy-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-success mb-0">Capacitación Continua</h6>
+                                <span class="badge bg-success">Completado</span>
+                            </div>
+                            <p class="mb-2"><strong>Objetivo:</strong> Certificar a 50 tutores en nuevas metodologías</p>
+                            <p class="mb-2"><strong>Alcance:</strong> Tutores activos y nuevos</p>
+                            <div class="progress mb-2" style="height: 8px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">52 tutores certificados</small>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-success">Reporte</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="strategy-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-primary mb-0">Actualización Curricular</h6>
-                            <span class="badge bg-primary">Planificado</span>
-                        </div>
-                        <p class="mb-2"><strong>Objetivo:</strong> Actualizar materiales de formación tutorial</p>
-                        <p class="mb-2"><strong>Alcance:</strong> Programa institucional</p>
-                        <div class="progress mb-2" style="height: 8px;">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <small class="text-muted">25% completado</small>
-                            <div>
-                                <button class="btn btn-sm btn-outline-primary">Editar</button>
-                                <button class="btn btn-sm btn-outline-success">Reporte</button>
+                        <div class="strategy-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">Actualización Curricular</h6>
+                                <span class="badge bg-primary">Planificado</span>
+                            </div>
+                            <p class="mb-2"><strong>Objetivo:</strong> Actualizar materiales de formación tutorial</p>
+                            <p class="mb-2"><strong>Alcance:</strong> Programa institucional</p>
+                            <div class="progress mb-2" style="height: 8px;">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">25% completado</small>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                    <button class="btn btn-sm btn-outline-success">Reporte</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="dashboard-card">
-                    <h5 class="card-title">Métricas Clave del PIT</h5>
-                    <div class="metrics-grid">
-                        <div class="metric-item">
-                            <div class="stats-number text-primary">92%</div>
-                            <div class="stats-label">Satisfacción Estudiantil</div>
+                <div class="col-lg-4">
+                    <div class="dashboard-card">
+                        <h5 class="card-title">Métricas Clave del PIT</h5>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <div class="stats-number text-primary">92%</div>
+                                <div class="stats-label">Satisfacción Estudiantil</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="stats-number text-success">88%</div>
+                                <div class="stats-label">Retención Estudiantil</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="stats-number text-info">85%</div>
+                                <div class="stats-label">Tutores Certificados</div>
+                            </div>
+                            <div class="metric-item">
+                                <div class="stats-number text-warning">78%</div>
+                                <div class="stats-label">Participación Activa</div>
+                            </div>
                         </div>
-                        <div class="metric-item">
-                            <div class="stats-number text-success">88%</div>
-                            <div class="stats-label">Retención Estudiantil</div>
+                        
+                        <div class="mt-4">
+                            <h6>Estado Actual del Programa</h6>
+                            <div class="alert alert-success">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <strong>En buen estado:</strong> Todas las métricas cumplen con los objetivos establecidos.
+                            </div>
                         </div>
-                        <div class="metric-item">
-                            <div class="stats-number text-info">85%</div>
-                            <div class="stats-label">Tutores Certificados</div>
-                        </div>
-                        <div class="metric-item">
-                            <div class="stats-number text-warning">78%</div>
-                            <div class="stats-label">Participación Activa</div>
-                        </div>
-                    </div>
-                    
-                    <h6 class="mt-4">Próximas Validaciones</h6>
-                    <div class="certificate-card">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span>Constancias de Tutores</span>
-                            <span class="badge bg-warning text-dark">45 pendientes</span>
-                        </div>
-                        <button class="btn btn-sm btn-primary-custom w-100">Revisar y Validar</button>
-                    </div>
-                    
-                    <div class="certificate-card">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span>Constancias de Estudiantes</span>
-                            <span class="badge bg-info">120 pendientes</span>
-                        </div>
-                        <button class="btn btn-sm btn-outline-primary w-100">Generar Lote</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Informes y constancias -->
-        <div class="row mt-4 g-4">
-            <div class="col-lg-6">
-                <div class="dashboard-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">Informes Semestrales por Programa</h5>
-                        <div class="filter-options">
-                            <button class="filter-btn active">Todos</button>
-                            <button class="filter-btn">Pendientes</button>
-                            <button class="filter-btn">Enviados</button>
+        <div class="info-section">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Informes Semestrales por Programa</h5>
+                            <div class="filter-options">
+                                <button class="filter-btn active">Todos</button>
+                                <button class="filter-btn">Pendientes</button>
+                                <button class="filter-btn">Enviados</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Lista desplegable de informes -->
+                        <div class="report-list">
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <h6 class="mb-1">Ingeniería en Sistemas</h6>
+                                    <p class="mb-0 text-muted">Periodo: Ene-Jun 2025</p>
+                                </div>
+                                <div class="report-actions">
+                                    <span class="badge bg-success">Enviado</span>
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" title="Descargar">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <h6 class="mb-1">Lic. en Matemáticas</h6>
+                                    <p class="mb-0 text-muted">Periodo: Ene-Jun 2025</p>
+                                </div>
+                                <div class="report-actions">
+                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <h6 class="mb-1">Ingeniería Industrial</h6>
+                                    <p class="mb-0 text-muted">Periodo: Ene-Jun 2025</p>
+                                </div>
+                                <div class="report-actions">
+                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" title="Editar">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <h6 class="mb-1">Lic. en Física</h6>
+                                    <p class="mb-0 text-muted">Periodo: Ene-Jun 2025</p>
+                                </div>
+                                <div class="report-actions">
+                                    <span class="badge bg-success">Enviado</span>
+                                    <button class="btn btn-sm btn-outline-primary" title="Ver">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" title="Descargar">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Programa</th>
-                                    <th>Periodo</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Ingeniería en Sistemas</td>
-                                    <td>Ene-Jun 2025</td>
-                                    <td><span class="status-completed">Enviado</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Lic. en Matemáticas</td>
-                                    <td>Ene-Jun 2025</td>
-                                    <td><span class="status-pending">Pendiente</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Ingeniería Industrial</td>
-                                    <td>Ene-Jun 2025</td>
-                                    <td><span class="status-pending">Pendiente</span></td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="dashboard-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">Gestión de Constancias</h5>
-                        <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#certificatesModal">
-                            <i class="bi bi-gear me-1"></i> Configurar
-                        </button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Tipo</th>
-                                    <th>Pendientes</th>
-                                    <th>Generadas</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tutores</td>
-                                    <td>45</td>
-                                    <td>112</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-success">Generar</button>
-                                        <button class="btn btn-sm btn-outline-primary">Validar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Estudiantes</td>
-                                    <td>120</td>
-                                    <td>890</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-success">Generar Lote</button>
-                                        <button class="btn btn-sm btn-outline-info">Descargar</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Coordinadores</td>
-                                    <td>8</td>
-                                    <td>15</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-success">Generar</button>
-                                        <button class="btn btn-sm btn-outline-primary">Revisar</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="col-lg-6">
+                    <div class="dashboard-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title mb-0">Gestión de Constancias</h5>
+                            <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#certificatesModal">
+                                <i class="bi bi-gear me-1"></i> Configurar
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Pendientes</th>
+                                        <th>Generadas</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tutores</td>
+                                        <td>45</td>
+                                        <td>112</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-success">Generar</button>
+                                            <button class="btn btn-sm btn-outline-primary">Validar</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estudiantes</td>
+                                        <td>120</td>
+                                        <td>890</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-success">Generar Lote</button>
+                                            <button class="btn btn-sm btn-outline-info">Descargar</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coordinadores</td>
+                                        <td>8</td>
+                                        <td>15</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-outline-success">Generar</button>
+                                            <button class="btn btn-sm btn-outline-primary">Revisar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Metas y mejoras -->
-        <div class="row mt-4 g-4">
-            <div class="col-lg-12">
-                <div class="dashboard-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">Metas y Estrategias de Mejora del PIT</h5>
-                        <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#goalsModal">
-                            <i class="bi bi-plus-circle me-1"></i> Nueva Meta
-                        </button>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Meta</th>
-                                    <th>Indicador</th>
-                                    <th>Línea Base</th>
-                                    <th>Meta</th>
-                                    <th>Avance</th>
-                                    <th>Responsable</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Incrementar cobertura</td>
-                                    <td>% estudiantes atendidos</td>
-                                    <td>85%</td>
-                                    <td>92%</td>
-                                    <td>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-success" style="width: 78%"></div>
-                                        </div>
-                                        <small>78%</small>
-                                    </td>
-                                    <td>Coordinadores Dept.</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Capacitación tutores</td>
-                                    <td>% tutores certificados</td>
-                                    <td>70%</td>
-                                    <td>90%</td>
-                                    <td>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-info" style="width: 85%"></div>
-                                        </div>
-                                        <small>85%</small>
-                                    </td>
-                                    <td>Coord. Institucional</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Mejorar satisfacción</td>
-                                    <td>Índice satisfacción</td>
-                                    <td>4.2/5</td>
-                                    <td>4.5/5</td>
-                                    <td>
-                                        <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-warning" style="width: 65%"></div>
-                                        </div>
-                                        <small>65%</small>
-                                    </td>
-                                    <td>Todos</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
-                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <div class="info-section">
+            <h3 class="section-title">Metas y Estrategias de Mejora del PIT</h3>
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title mb-0">Seguimiento de Metas Institucionales</h5>
+                    <button class="btn btn-sm btn-primary-custom" data-bs-toggle="modal" data-bs-target="#goalsModal">
+                        <i class="bi bi-plus-circle me-1"></i> Nueva Meta
+                    </button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Accesos rápidos -->
-        <div class="row mt-4 g-4">
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#reportModal">
-                    <i class="bi bi-file-bar-graph" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Generar Informe</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#strategyModal">
-                    <i class="bi bi-diagram-3" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Nueva Estrategia</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#certificatesModal">
-                    <i class="bi bi-file-check" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Gestionar Constancias</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#goalsModal">
-                    <i class="bi bi-bullseye" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Definir Metas</p>
-                </button>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Meta</th>
+                                <th>Indicador</th>
+                                <th>Línea Base</th>
+                                <th>Meta</th>
+                                <th>Avance</th>
+                                <th>Responsable</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Incrementar cobertura</td>
+                                <td>% estudiantes atendidos</td>
+                                <td>85%</td>
+                                <td>92%</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: 78%"></div>
+                                    </div>
+                                    <small>78%</small>
+                                </td>
+                                <td>Coordinadores Dept.</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                    <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Capacitación tutores</td>
+                                <td>% tutores certificados</td>
+                                <td>70%</td>
+                                <td>90%</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-info" style="width: 85%"></div>
+                                    </div>
+                                    <small>85%</small>
+                                </td>
+                                <td>Coord. Institucional</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                    <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mejorar satisfacción</td>
+                                <td>Índice satisfacción</td>
+                                <td>4.2/5</td>
+                                <td>4.5/5</td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" style="width: 65%"></div>
+                                    </div>
+                                    <small>65%</small>
+                                </td>
+                                <td>Todos</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                    <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -837,41 +933,41 @@ body {
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-file-bar-graph text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Generar Informe</h5>
-                                <p class="card-text">Crear informe semestral para Subdirector Académico</p>
+                                <i class="bi bi-file-bar-graph text-primary action-icon"></i>
+                                <h5 class="action-title">Generar Informe</h5>
+                                <p class="action-description">Crear informe semestral para Subdirector Académico</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#reportModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-diagram-3 text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Nueva Estrategia</h5>
-                                <p class="card-text">Definir estrategias para formación de tutores</p>
+                                <i class="bi bi-diagram-3 text-primary action-icon"></i>
+                                <h5 class="action-title">Nueva Estrategia</h5>
+                                <p class="action-description">Definir estrategias para formación de tutores</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#strategyModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-file-check text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Gestionar Constancias</h5>
-                                <p class="card-text">Expedir constancias a tutores y estudiantes</p>
+                                <i class="bi bi-file-check text-primary action-icon"></i>
+                                <h5 class="action-title">Gestionar Constancias</h5>
+                                <p class="action-description">Expedir constancias a tutores y estudiantes</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#certificatesModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-bullseye text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Definir Metas</h5>
-                                <p class="card-text">Establecer nuevas metas para el PIT</p>
+                                <i class="bi bi-bullseye text-primary action-icon"></i>
+                                <h5 class="action-title">Definir Metas</h5>
+                                <p class="action-description">Establecer nuevas metas para el PIT</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#goalsModal">Continuar</button>
                             </div>
                         </div>

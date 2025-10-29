@@ -211,30 +211,18 @@ body {
     color: #155724;
 }
 
-.quick-action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.quick-action-btn:hover {
-    background-color: rgba(106, 13, 173, 0.1);
-}
-
 .btn-primary-custom {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
 
 .btn-primary-custom:hover {
-    background-color: #5A0A9C;
-    border-color: #5A0A9C;
+    background-color: #0D4F7C;
+    border-color: #0D4F7C;
 }
 
 .modal-header-custom {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #5A0A9C 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0D4F7C 100%);
     color: white;
 }
 
@@ -288,6 +276,93 @@ body {
     width: 100%;
 }
 
+/* Nuevos estilos para mejoras visuales */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0;
+}
+
+.info-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.session-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-urgent {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+}
+
+.status-followup {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+.status-normal {
+    background-color: rgba(15, 96, 151, 0.1);
+    color: var(--primary-color);
+}
+
+.action-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.action-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.action-description {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .main-container {
@@ -300,6 +375,12 @@ body {
     
     .chart-container {
         height: 250px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
     }
 }
 </style>
@@ -383,47 +464,43 @@ body {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Panel de Seguimiento Psicológico</h2>
+        <!-- Encabezado de página con botón de acciones rápidas -->
+        <div class="page-header">
+            <h1 class="page-title">Panel de Seguimiento Psicológico</h1>
             <div class="d-flex">
                 <div class="filter-options me-3">
                     <button class="filter-btn active">Hoy</button>
                     <button class="filter-btn">Esta semana</button>
                     <button class="filter-btn">Este mes</button>
                 </div>
-                <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
-                    <i class="bi bi-lightning-fill me-1"></i> Acciones rápidas
+                <button class="btn btn-primary-custom btn-lg" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                    <i class="bi bi-lightning-fill me-2"></i> Acciones Rápidas
                 </button>
             </div>
         </div>
 
         <!-- Tarjetas principales -->
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
+        <div class="info-section">
+            <h3 class="section-title">Resumen de Actividad</h3>
+            <div class="stats-grid">
                 <div class="dashboard-card text-center">
                     <div class="card-icon"><i class="bi bi-people"></i></div>
                     <h5 class="card-title">Sesiones Activas</h5>
                     <div class="stats-number">24</div>
                     <div class="stats-label">estudiantes en seguimiento</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card text-center">
                     <div class="card-icon"><i class="bi bi-clock-history"></i></div>
                     <h5 class="card-title">Sesiones Este Mes</h5>
                     <div class="stats-number">68</div>
                     <div class="stats-label">sesiones realizadas</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card text-center">
                     <div class="card-icon"><i class="bi bi-exclamation-triangle"></i></div>
                     <h5 class="card-title">Casos Prioritarios</h5>
                     <div class="stats-number">5</div>
                     <div class="stats-label">requieren atención urgente</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card text-center">
                     <div class="card-icon"><i class="bi bi-graph-up-arrow"></i></div>
                     <h5 class="card-title">Indicadores</h5>
@@ -434,236 +511,194 @@ body {
         </div>
 
         <!-- Gráficos y sesiones -->
-        <div class="row mt-5 g-4">
-            <div class="col-lg-8">
-                <div class="dashboard-card">
-                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                        <span>Distribución por Nivel de Desempeño</span>
-                        <select class="form-select form-select-sm w-auto">
-                            <option>Todas las carreras</option>
-                            <option>Ingeniería en Sistemas</option>
-                            <option>Lic. en Matemáticas</option>
-                            <option>Ingeniería Industrial</option>
-                        </select>
-                    </h5>
-                    <div class="chart-container">
-                        <canvas id="performanceChart"></canvas>
+        <div class="info-section">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="dashboard-card">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            <span>Distribución por Nivel de Desempeño</span>
+                            <select class="form-select form-select-sm w-auto">
+                                <option>Todas las carreras</option>
+                                <option>Ingeniería en Sistemas</option>
+                                <option>Lic. en Matemáticas</option>
+                                <option>Ingeniería Industrial</option>
+                            </select>
+                        </h5>
+                        <div class="chart-container">
+                            <canvas id="performanceChart"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="dashboard-card">
-                    <h5 class="card-title">Próximas Sesiones</h5>
-                    
-                    <div class="session-card session-urgent">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-danger mb-0">Carlos Rodríguez</h6>
-                            <span class="risk-indicator risk-high"></span>
+                <div class="col-lg-4">
+                    <div class="dashboard-card">
+                        <h5 class="card-title">Próximas Sesiones</h5>
+                        
+                        <div class="session-card session-urgent">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-danger mb-0">Carlos Rodríguez</h6>
+                                <span class="session-status status-urgent">
+                                    <i class="bi bi-exclamation-triangle"></i> Urgente
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Hoy, 15:00 hrs</p>
+                            <p class="mb-2"><strong>Motivo:</strong> Crisis de ansiedad - Seguimiento</p>
+                            <button class="btn btn-sm btn-outline-danger w-100">Ver Expediente</button>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Hoy, 15:00 hrs</p>
-                        <p class="mb-2"><strong>Motivo:</strong> Crisis de ansiedad - Seguimiento</p>
-                        <button class="btn btn-sm btn-outline-danger w-100">Ver Expediente</button>
-                    </div>
 
-                    <div class="session-card session-followup">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-warning mb-0">Ana García López</h6>
-                            <span class="risk-indicator risk-medium"></span>
+                        <div class="session-card session-followup">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-warning mb-0">Ana García López</h6>
+                                <span class="session-status status-followup">
+                                    <i class="bi bi-clock-history"></i> Seguimiento
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Mañana, 11:00 hrs</p>
+                            <p class="mb-2"><strong>Motivo:</strong> Seguimiento académico</p>
+                            <button class="btn btn-sm btn-outline-warning w-100">Ver Expediente</button>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Mañana, 11:00 hrs</p>
-                        <p class="mb-2"><strong>Motivo:</strong> Seguimiento académico</p>
-                        <button class="btn btn-sm btn-outline-warning w-100">Ver Expediente</button>
-                    </div>
 
-                    <div class="session-card">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-primary mb-0">Sesión Grupal - 1° Semestre</h6>
-                            <span class="risk-indicator risk-low"></span>
+                        <div class="session-card">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">Sesión Grupal - 1° Semestre</h6>
+                                <span class="session-status status-normal">
+                                    <i class="bi bi-people"></i> Grupal
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 10:00 hrs</p>
+                            <p class="mb-2"><strong>Tema:</strong> Manejo del estrés académico</p>
+                            <button class="btn btn-sm btn-outline-primary w-100">Preparar Material</button>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 10:00 hrs</p>
-                        <p class="mb-2"><strong>Tema:</strong> Manejo del estrés académico</p>
-                        <button class="btn btn-sm btn-outline-primary w-100">Preparar Material</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Sección confidencial - Estudiantes en seguimiento -->
-        <div class="confidential-section mt-4">
-            <h4 class="text-center mb-4">
-                <i class="bi bi-shield-lock me-2"></i>Expedientes Confidenciales en Seguimiento
-            </h4>
-            
-            <div class="filter-options justify-content-center mb-4">
-                <button class="filter-btn active">Todos</button>
-                <button class="filter-btn">Prioritarios</button>
-                <button class="filter-btn">Por carrera</button>
-                <button class="filter-btn">Por semestre</button>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Estudiante</th>
-                            <th>Carrera</th>
-                            <th>Semestre</th>
-                            <th>Sesiones</th>
-                            <th>Nivel Desempeño</th>
-                            <th>Riesgo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Carlos Rodríguez</td>
-                            <td>Ing. Sistemas</td>
-                            <td>3°</td>
-                            <td>8</td>
-                            <td><span class="performance-badge performance-critical">Crítico</span></td>
-                            <td><span class="risk-indicator risk-high"></span> Alto</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">Expediente</button>
-                                <button class="btn btn-sm btn-outline-success">Sesión</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ana García López</td>
-                            <td>Lic. Matemáticas</td>
-                            <td>2°</td>
-                            <td>5</td>
-                            <td><span class="performance-badge performance-low">Bajo</span></td>
-                            <td><span class="risk-indicator risk-medium"></span> Medio</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">Expediente</button>
-                                <button class="btn btn-sm btn-outline-success">Sesión</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Miguel Torres</td>
-                            <td>Ing. Industrial</td>
-                            <td>4°</td>
-                            <td>3</td>
-                            <td><span class="performance-badge performance-regular">Regular</span></td>
-                            <td><span class="risk-indicator risk-low"></span> Bajo</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">Expediente</button>
-                                <button class="btn btn-sm btn-outline-success">Sesión</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Laura Mendoza</td>
-                            <td>Ing. Sistemas</td>
-                            <td>1°</td>
-                            <td>6</td>
-                            <td><span class="performance-badge performance-good">Bueno</span></td>
-                            <td><span class="risk-indicator risk-low"></span> Bajo</td>
-                            <td>
-                                <button class="btn btn-sm btn-outline-primary">Expediente</button>
-                                <button class="btn btn-sm btn-outline-success">Sesión</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Estadísticas para Subdirector Académico -->
-        <div class="row mt-5 g-4">
-            <div class="col-lg-6">
-                <div class="dashboard-card">
-                    <h5 class="card-title">Estadísticas por Carrera</h5>
-                    <div class="chart-container">
-                        <canvas id="careerStatsChart"></canvas>
-                    </div>
+        <div class="info-section">
+            <h3 class="section-title">Expedientes Confidenciales en Seguimiento</h3>
+            <div class="confidential-section">
+                <div class="filter-options justify-content-center mb-4">
+                    <button class="filter-btn active">Todos</button>
+                    <button class="filter-btn">Prioritarios</button>
+                    <button class="filter-btn">Por carrera</button>
+                    <button class="filter-btn">Por semestre</button>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="dashboard-card">
-                    <h5 class="card-title">Distribución por Semestre</h5>
-                    <div class="chart-container">
-                        <canvas id="semesterStatsChart"></canvas>
-                    </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Carrera</th>
+                                <th>Semestre</th>
+                                <th>Sesiones</th>
+                                <th>Nivel Desempeño</th>
+                                <th>Riesgo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Carlos Rodríguez</td>
+                                <td>Ing. Sistemas</td>
+                                <td>3°</td>
+                                <td>8</td>
+                                <td><span class="performance-badge performance-critical">Crítico</span></td>
+                                <td><span class="risk-indicator risk-high"></span> Alto</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Expediente</button>
+                                    <button class="btn btn-sm btn-outline-success">Sesión</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ana García López</td>
+                                <td>Lic. Matemáticas</td>
+                                <td>2°</td>
+                                <td>5</td>
+                                <td><span class="performance-badge performance-low">Bajo</span></td>
+                                <td><span class="risk-indicator risk-medium"></span> Medio</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Expediente</button>
+                                    <button class="btn btn-sm btn-outline-success">Sesión</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Miguel Torres</td>
+                                <td>Ing. Industrial</td>
+                                <td>4°</td>
+                                <td>3</td>
+                                <td><span class="performance-badge performance-regular">Regular</span></td>
+                                <td><span class="risk-indicator risk-low"></span> Bajo</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Expediente</button>
+                                    <button class="btn btn-sm btn-outline-success">Sesión</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Laura Mendoza</td>
+                                <td>Ing. Sistemas</td>
+                                <td>1°</td>
+                                <td>6</td>
+                                <td><span class="performance-badge performance-good">Bueno</span></td>
+                                <td><span class="risk-indicator risk-low"></span> Bajo</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Expediente</button>
+                                    <button class="btn btn-sm btn-outline-success">Sesión</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
 
         <!-- Reportes para Subdirector Académico -->
-        <div class="row mt-4 g-4">
-            <div class="col-12">
-                <div class="report-card">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h5 class="card-title mb-0">
-                            <i class="bi bi-graph-up me-2"></i>Reportes Estadísticos para Subdirección Académica
-                        </h5>
-                        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#reportModal">
-                            <i class="bi bi-file-earmark-pdf me-1"></i> Generar Reporte
-                        </button>
-                    </div>
-                    
-                    <div class="row text-center">
-                        <div class="col-md-3">
-                            <div class="metric-item">
-                                <div class="stats-number text-primary">15%</div>
-                                <div class="stats-label">Estudiantes con seguimiento</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-item">
-                                <div class="stats-number text-success">72%</div>
-                                <div class="stats-label">Mejoría reportada</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-item">
-                                <div class="stats-number text-warning">8%</div>
-                                <div class="stats-label">Casos prioritarios</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="metric-item">
-                                <div class="stats-number text-info">45%</div>
-                                <div class="stats-label">1° y 2° semestre</div>
-                            </div>
+        <div class="info-section">
+            <h3 class="section-title">Reportes Estadísticos para Subdirección Académica</h3>
+            <div class="report-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-graph-up me-2"></i>Resumen Ejecutivo
+                    </h5>
+                    <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#reportModal">
+                        <i class="bi bi-file-earmark-pdf me-1"></i> Generar Reporte
+                    </button>
+                </div>
+                
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="metric-item">
+                            <div class="stats-number text-primary">15%</div>
+                            <div class="stats-label">Estudiantes con seguimiento</div>
                         </div>
                     </div>
-
-                    <div class="mt-4">
-                        <h6>Resumen Ejecutivo</h6>
-                        <p class="mb-2">• 68 sesiones realizadas este mes con 24 estudiantes en seguimiento activo</p>
-                        <p class="mb-2">• Mayor concentración de casos en Ingeniería en Sistemas (35%)</p>
-                        <p class="mb-2">• Los semestres iniciales (1° y 2°) representan el 45% de la atención</p>
-                        <p class="mb-0">• Tasa de mejoría general del 72% en indicadores de desempeño académico</p>
+                    <div class="col-md-3">
+                        <div class="metric-item">
+                            <div class="stats-number text-success">72%</div>
+                            <div class="stats-label">Mejoría reportada</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-item">
+                            <div class="stats-number text-warning">8%</div>
+                            <div class="stats-label">Casos prioritarios</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="metric-item">
+                            <div class="stats-number text-info">45%</div>
+                            <div class="stats-label">1° y 2° semestre</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- Accesos rápidos -->
-        <div class="row mt-4 g-4">
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#sessionModal">
-                    <i class="bi bi-journal-plus" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Nueva Sesión</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#studentModal">
-                    <i class="bi bi-person-plus" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Agregar Estudiante</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#reportModal">
-                    <i class="bi bi-file-earmark-text" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Generar Reporte</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#statsModal">
-                    <i class="bi bi-graph-up" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Ver Estadísticas</p>
-                </button>
+                <div class="mt-4">
+                    <h6>Resumen Ejecutivo</h6>
+                    <p class="mb-2">• 68 sesiones realizadas este mes con 24 estudiantes en seguimiento activo</p>
+                    <p class="mb-2">• Mayor concentración de casos en Ingeniería en Sistemas (35%)</p>
+                    <p class="mb-2">• Los semestres iniciales (1° y 2°) representan el 45% de la atención</p>
+                    <p class="mb-0">• Tasa de mejoría general del 72% en indicadores de desempeño académico</p>
+                </div>
             </div>
         </div>
 
@@ -695,41 +730,41 @@ body {
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-journal-plus text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Registrar Sesión</h5>
-                                <p class="card-text">Registrar nueva sesión con estudiante</p>
+                                <i class="bi bi-journal-plus text-primary action-icon"></i>
+                                <h5 class="action-title">Registrar Sesión</h5>
+                                <p class="action-description">Registrar nueva sesión con estudiante</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#sessionModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-file-earmark-text text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Generar Reporte</h5>
-                                <p class="card-text">Crear reporte para Subdirector Académico</p>
+                                <i class="bi bi-file-earmark-text text-primary action-icon"></i>
+                                <h5 class="action-title">Generar Reporte</h5>
+                                <p class="action-description">Crear reporte para Subdirector Académico</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#reportModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-person-plus text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Nuevo Estudiante</h5>
-                                <p class="card-text">Agregar nuevo estudiante al sistema</p>
+                                <i class="bi bi-person-plus text-primary action-icon"></i>
+                                <h5 class="action-title">Nuevo Estudiante</h5>
+                                <p class="action-description">Agregar nuevo estudiante al sistema</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#studentModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-graph-up text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Estadísticas</h5>
-                                <p class="card-text">Ver análisis estadísticos detallados</p>
+                                <i class="bi bi-graph-up text-primary action-icon"></i>
+                                <h5 class="action-title">Estadísticas</h5>
+                                <p class="action-description">Ver análisis estadísticos detallados</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#statsModal">Continuar</button>
                             </div>
                         </div>
@@ -902,65 +937,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     '#ffc107',
                     '#fd7e14',
                     '#dc3545'
-                ],
-                borderWidth: 2,
-                borderColor: '#fff'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    position: 'bottom'
-                }
-            }
-        }
-    });
-
-    // Gráfico de estadísticas por carrera
-    const careerCtx = document.getElementById('careerStatsChart').getContext('2d');
-    const careerChart = new Chart(careerCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Ing. Sistemas', 'Lic. Matemáticas', 'Ing. Industrial', 'Ing. Química', 'Lic. Física'],
-            datasets: [{
-                label: 'Estudiantes en seguimiento',
-                data: [35, 20, 18, 15, 12],
-                backgroundColor: '#6A0DAD',
-                borderColor: '#5A0A9C',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Porcentaje (%)'
-                    }
-                }
-            }
-        }
-    });
-
-    // Gráfico de distribución por semestre
-    const semesterCtx = document.getElementById('semesterStatsChart').getContext('2d');
-    const semesterChart = new Chart(semesterCtx, {
-        type: 'pie',
-        data: {
-            labels: ['1° Semestre', '2° Semestre', '3° Semestre', '4° Semestre', '5°+ Semestre'],
-            datasets: [{
-                data: [25, 20, 18, 15, 22],
-                backgroundColor: [
-                    '#6A0DAD',
-                    '#9D4EDD',
-                    '#C77DFF',
-                    '#E0AAFF',
-                    '#F3E5F5'
                 ],
                 borderWidth: 2,
                 borderColor: '#fff'

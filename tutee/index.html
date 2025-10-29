@@ -189,11 +189,13 @@ body {
 .btn-primary-custom {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
+    color: white;
 }
 
 .btn-primary-custom:hover {
     background-color: #0D4F7C;
     border-color: #0D4F7C;
+    color: white;
 }
 
 .modal-header-custom {
@@ -217,6 +219,93 @@ body {
     padding: 1.5rem;
     margin-bottom: 1rem;
     border-left: 4px solid var(--warning-color);
+}
+
+/* Mejoras adicionales */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.page-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin: 0;
+}
+
+.info-section {
+    margin-bottom: 2.5rem;
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.session-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-upcoming {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+}
+
+.status-completed {
+    background-color: rgba(15, 96, 151, 0.1);
+    color: var(--primary-color);
+}
+
+.status-pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+}
+
+.action-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.action-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.action-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.action-description {
+    color: #6c757d;
+    font-size: 0.9rem;
 }
 </style>
 </head>
@@ -286,65 +375,64 @@ body {
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2>Mi Programa de Tutoría</h2>
-            <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
-                <i class="bi bi-lightning-fill me-1"></i> Acciones rápidas
+        <!-- Encabezado de página con botón de acciones rápidas -->
+        <div class="page-header">
+            <h1 class="page-title">Mi Programa de Tutoría</h1>
+            <button class="btn btn-primary-custom btn-lg" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                <i class="bi bi-lightning-fill me-2"></i> Acciones Rápidas
             </button>
         </div>
 
         <!-- Información del tutor asignado -->
-        <div class="tutor-card">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-center">
-                    <div class="card-icon">
-                        <i class="bi bi-person-badge-fill"></i>
+        <div class="info-section">
+            <h3 class="section-title">Mi Tutor Asignado</h3>
+            <div class="tutor-card">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <div class="card-icon">
+                            <i class="bi bi-person-badge-fill"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <h4 class="text-primary">Dr. Juan Carlos Martínez</h4>
-                    <p class="mb-1"><strong>Departamento:</strong> Sistemas y Computación</p>
-                    <p class="mb-1"><strong>Especialidad:</strong> Inteligencia Artificial</p>
-                    <p class="mb-0"><strong>Correo:</strong> jmartinez@tecnm.mx</p>
-                </div>
-                <div class="col-md-4 text-md-end">
-                    <button class="btn btn-outline-primary me-2">
-                        <i class="bi bi-envelope me-1"></i> Contactar
-                    </button>
-                    <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#requestSessionModal">
-                        <i class="bi bi-calendar-plus me-1"></i> Solicitar Sesión
-                    </button>
+                    <div class="col-md-6">
+                        <h4 class="text-primary">Dr. Juan Carlos Martínez</h4>
+                        <p class="mb-1"><strong>Departamento:</strong> Sistemas y Computación</p>
+                        <p class="mb-1"><strong>Especialidad:</strong> Inteligencia Artificial</p>
+                        <p class="mb-0"><strong>Correo:</strong> jmartinez@tecnm.mx</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <button class="btn btn-outline-primary me-2">
+                            <i class="bi bi-envelope me-1"></i> Contactar
+                        </button>
+                        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#requestSessionModal">
+                            <i class="bi bi-calendar-plus me-1"></i> Solicitar Sesión
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tarjetas principales -->
-        <div class="row g-4 mb-4">
-            <div class="col-md-6 col-lg-3">
+        <!-- Estadísticas de progreso -->
+        <div class="info-section">
+            <h3 class="section-title">Mi Progreso</h3>
+            <div class="stats-grid">
                 <div class="dashboard-card">
                     <div class="card-icon"><i class="bi bi-calendar-check"></i></div>
                     <h5 class="card-title">Sesiones Completadas</h5>
                     <div class="stats-number">8</div>
                     <div class="stats-label">de 12 programadas</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card">
                     <div class="card-icon"><i class="bi bi-clock-history"></i></div>
                     <h5 class="card-title">Asistencia</h5>
                     <div class="stats-number">92%</div>
                     <div class="stats-label">de sesiones asistidas</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card">
                     <div class="card-icon"><i class="bi bi-chat-left-text"></i></div>
                     <h5 class="card-title">Feedback Enviado</h5>
                     <div class="stats-number">6</div>
                     <div class="stats-label">encuestas completadas</div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
                 <div class="dashboard-card">
                     <div class="card-icon"><i class="bi bi-award"></i></div>
                     <h5 class="card-title">Progreso</h5>
@@ -355,217 +443,91 @@ body {
         </div>
 
         <!-- Próximas sesiones y sesiones recientes -->
-        <div class="row g-4">
-            <div class="col-lg-6">
-                <div class="dashboard-card text-start">
-                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                        <span>Próximas Sesiones</span>
-                        <span class="badge bg-primary">2 Programadas</span>
-                    </h5>
-                    
-                    <div class="session-card session-upcoming">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-success mb-0">Sesión Individual</h6>
-                            <span class="badge bg-success">Próxima</span>
+        <div class="info-section">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <h3 class="section-title">Próximas Sesiones</h3>
+                    <div class="dashboard-card text-start">
+                        <div class="session-card session-upcoming">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-success mb-0">Sesión Individual</h6>
+                                <span class="session-status status-upcoming">
+                                    <i class="bi bi-clock"></i> Próxima
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Lunes, 20 de Octubre 2025</p>
+                            <p class="mb-1"><i class="bi bi-clock me-2"></i>14:00 - 15:00 hrs</p>
+                            <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Oficina de Tutorías - Edificio B</p>
+                            <p class="mb-0"><strong>Tema:</strong> Avance en proyecto de bases de datos</p>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-primary-custom me-2">Confirmar Asistencia</button>
+                                <button class="btn btn-sm btn-outline-secondary">Reprogramar</button>
+                            </div>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Lunes, 20 de Octubre 2025</p>
-                        <p class="mb-1"><i class="bi bi-clock me-2"></i>14:00 - 15:00 hrs</p>
-                        <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Oficina de Tutorías - Edificio B</p>
-                        <p class="mb-0"><strong>Tema:</strong> Avance en proyecto de bases de datos</p>
-                        <div class="mt-2">
-                            <button class="btn btn-sm btn-outline-primary">Confirmar Asistencia</button>
-                            <button class="btn btn-sm btn-outline-secondary">Reprogramar</button>
-                        </div>
-                    </div>
 
-                    <div class="session-card session-upcoming">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-success mb-0">Sesión Grupal</h6>
-                            <span class="badge bg-info">Grupal</span>
-                        </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 24 de Octubre 2025</p>
-                        <p class="mb-1"><i class="bi bi-clock me-2"></i>16:00 - 17:30 hrs</p>
-                        <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Aula 204 - Edificio Principal</p>
-                        <p class="mb-0"><strong>Tema:</strong> Técnicas de estudio y preparación para exámenes</p>
-                        <div class="mt-2">
-                            <button class="btn btn-sm btn-outline-primary">Confirmar Asistencia</button>
+                        <div class="session-card session-upcoming">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-success mb-0">Sesión Grupal</h6>
+                                <span class="session-status status-upcoming">
+                                    <i class="bi bi-people"></i> Grupal
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 24 de Octubre 2025</p>
+                            <p class="mb-1"><i class="bi bi-clock me-2"></i>16:00 - 17:30 hrs</p>
+                            <p class="mb-2"><i class="bi bi-geo-alt me-2"></i>Aula 204 - Edificio Principal</p>
+                            <p class="mb-0"><strong>Tema:</strong> Técnicas de estudio y preparación para exámenes</p>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-primary-custom">Confirmar Asistencia</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-lg-6">
-                <div class="dashboard-card text-start">
-                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                        <span>Sesiones Recientes</span>
-                        <span class="badge bg-secondary">4 Completadas</span>
-                    </h5>
-                    
-                    <div class="session-card session-completed">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-primary mb-0">Sesión Individual</h6>
-                            <span class="attendance-badge bg-success">Asistió</span>
+                <div class="col-lg-6">
+                    <h3 class="section-title">Sesiones Recientes</h3>
+                    <div class="dashboard-card text-start">
+                        <div class="session-card session-completed">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">Sesión Individual</h6>
+                                <span class="session-status status-completed">
+                                    <i class="bi bi-check-circle"></i> Completada
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Miércoles, 15 de Octubre 2025</p>
+                            <p class="mb-2"><strong>Tema:</strong> Revisión de avance académico</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button class="btn btn-sm btn-outline-primary">Ver Resumen</button>
+                                <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#feedbackModal">
+                                    <i class="bi bi-chat-left-text me-1"></i>Dar Feedback
+                                </button>
+                            </div>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Miércoles, 15 de Octubre 2025</p>
-                        <p class="mb-2"><strong>Tema:</strong> Revisión de avance académico</p>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-primary">Ver Resumen</button>
-                            <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                                <i class="bi bi-chat-left-text me-1"></i>Dar Feedback
-                            </button>
-                        </div>
-                    </div>
 
-                    <div class="session-card session-completed">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h6 class="text-primary mb-0">Sesión Grupal</h6>
-                            <span class="attendance-badge bg-success">Asistió</span>
+                        <div class="session-card session-completed">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h6 class="text-primary mb-0">Sesión Grupal</h6>
+                                <span class="session-status status-completed">
+                                    <i class="bi bi-check-circle"></i> Completada
+                                </span>
+                            </div>
+                            <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 10 de Octubre 2025</p>
+                            <p class="mb-2"><strong>Tema:</strong> Manejo del estrés académico</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <button class="btn btn-sm btn-outline-primary">Ver Resumen</button>
+                                <button class="btn btn-sm btn-outline-success">
+                                    <i class="bi bi-chat-left-text me-1"></i>Feedback Enviado
+                                </button>
+                            </div>
                         </div>
-                        <p class="mb-1"><i class="bi bi-calendar me-2"></i>Viernes, 10 de Octubre 2025</p>
-                        <p class="mb-2"><strong>Tema:</strong> Manejo del estrés académico</p>
-                        <div class="d-flex justify-content-between">
-                            <button class="btn btn-sm btn-outline-primary">Ver Resumen</button>
-                            <button class="btn btn-sm btn-outline-success">
-                                <i class="bi bi-chat-left-text me-1"></i>Feedback Enviado
-                            </button>
-                        </div>
-                    </div>
 
-                    <div class="text-center mt-3">
-                        <button class="btn btn-outline-primary">Ver Historial Completo</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Canales de apoyo y feedback -->
-        <div class="row g-4 mt-2">
-            <div class="col-lg-6">
-                <div class="channel-card">
-                    <h5 class="card-title text-warning">
-                        <i class="bi bi-info-circle me-2"></i>Canales de Apoyo Disponibles
-                    </h5>
-                    <p class="mb-3">Tu tutor te ha sugerido los siguientes canales de apoyo:</p>
-                    
-                    <div class="mb-2">
-                        <strong><i class="bi bi-heart-pulse me-2"></i>Orientación Psicológica:</strong>
-                        <p class="mb-1 ms-4">Servicio de atención psicológica para manejo de estrés y ansiedad.</p>
-                        <button class="btn btn-sm btn-outline-warning ms-4">Solicitar Cita</button>
-                    </div>
-                    
-                    <div class="mb-2">
-                        <strong><i class="bi bi-book me-2"></i>Asesoría Académica:</strong>
-                        <p class="mb-1 ms-4">Apoyo adicional en materias con dificultad.</p>
-                        <button class="btn btn-sm btn-outline-warning ms-4">Ver Horarios</button>
-                    </div>
-                    
-                    <div>
-                        <strong><i class="bi bi-briefcase me-2"></i>Orientación Vocacional:</strong>
-                        <p class="mb-1 ms-4">Asesoría para definición de proyecto profesional.</p>
-                        <button class="btn btn-sm btn-outline-warning ms-4">Agendar Cita</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="feedback-card">
-                    <h5 class="card-title">
-                        <i class="bi bi-chat-left-text me-2"></i>Retroalimentación del Programa
-                    </h5>
-                    <p class="mb-3">Tu opinión es importante para mejorar el programa de tutorías:</p>
-                    
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span>Encuesta de Satisfacción - Semestre Actual</span>
-                            <span class="badge bg-warning text-dark">Pendiente</span>
-                        </div>
-                        <button class="btn btn-primary-custom w-100">Completar Encuesta</button>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span>Evaluación de Tutor</span>
-                            <span class="badge bg-success">Completada</span>
-                        </div>
-                        <button class="btn btn-outline-secondary w-100">Ver Respuestas</button>
-                    </div>
-                    
-                    <div>
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span>Sugerencias para el PIT</span>
-                            <span class="badge bg-info">Disponible</span>
-                        </div>
-                        <button class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#suggestionsModal">
-                            Enviar Sugerencias
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Progreso de créditos -->
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="dashboard-card">
-                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                        <span>Progreso de Créditos de Actividad Complementaria</span>
-                        <span class="badge bg-success">2/5 Créditos Obtenidos</span>
-                    </h5>
-                    <div class="progress mb-3" style="height: 20px;">
-                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 40%;" 
-                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-                            40%
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-3">
-                            <small class="text-muted">Sesiones Requeridas</small>
-                            <div class="fw-bold">12</div>
-                        </div>
-                        <div class="col-md-3">
-                            <small class="text-muted">Completadas</small>
-                            <div class="fw-bold">8</div>
-                        </div>
-                        <div class="col-md-3">
-                            <small class="text-muted">Feedback Entregado</small>
-                            <div class="fw-bold">6/8</div>
-                        </div>
-                        <div class="col-md-3">
-                            <small class="text-muted">Créditos Obtenidos</small>
-                            <div class="fw-bold text-success">2/5</div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-outline-primary">Ver Historial Completo</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Accesos rápidos -->
-        <div class="row mt-4 g-4">
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#requestSessionModal">
-                    <i class="bi bi-calendar-plus" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Solicitar Sesión</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#contactTutorModal">
-                    <i class="bi bi-envelope" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Contactar Tutor</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#feedbackModal">
-                    <i class="bi bi-chat-left-text" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Dar Feedback</p>
-                </button>
-            </div>
-            <div class="col-md-3 col-6">
-                <button class="quick-action-btn dashboard-card w-100 py-4" data-bs-toggle="modal" data-bs-target="#supportModal">
-                    <i class="bi bi-question-circle" style="font-size:2rem;color:var(--primary-color)"></i>
-                    <p class="mt-2">Solicitar Apoyo</p>
-                </button>
-            </div>
-        </div>
 
     </div>
 </div>
@@ -586,41 +548,41 @@ body {
             <div class="modal-body">
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-calendar-plus text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Solicitar Sesión</h5>
-                                <p class="card-text">Solicitar una nueva sesión con tu tutor</p>
+                                <i class="bi bi-calendar-plus text-primary action-icon"></i>
+                                <h5 class="action-title">Solicitar Sesión</h5>
+                                <p class="action-description">Solicitar una nueva sesión con tu tutor</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#requestSessionModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-chat-left-text text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Dar Feedback</h5>
-                                <p class="card-text">Completar encuestas de satisfacción</p>
+                                <i class="bi bi-chat-left-text text-primary action-icon"></i>
+                                <h5 class="action-title">Dar Feedback</h5>
+                                <p class="action-description">Completar encuestas de satisfacción</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#feedbackModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-envelope text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Contactar Tutor</h5>
-                                <p class="card-text">Enviar mensaje a tu tutor asignado</p>
+                                <i class="bi bi-envelope text-primary action-icon"></i>
+                                <h5 class="action-title">Contactar Tutor</h5>
+                                <p class="action-description">Enviar mensaje a tu tutor asignado</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#contactTutorModal">Continuar</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="card h-100">
+                        <div class="card h-100 action-card">
                             <div class="card-body text-center">
-                                <i class="bi bi-question-circle text-primary" style="font-size: 2rem;"></i>
-                                <h5 class="card-title mt-2">Solicitar Apoyo</h5>
-                                <p class="card-text">Solicitar apoyo adicional o canalización</p>
+                                <i class="bi bi-question-circle text-primary action-icon"></i>
+                                <h5 class="action-title">Solicitar Apoyo</h5>
+                                <p class="action-description">Solicitar apoyo adicional o canalización</p>
                                 <button class="btn btn-primary-custom w-100" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#supportModal">Continuar</button>
                             </div>
                         </div>
@@ -901,17 +863,23 @@ body {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Funcionalidad para confirmar asistencia
-    const confirmButtons = document.querySelectorAll('.btn-outline-primary');
+    const confirmButtons = document.querySelectorAll('.btn-primary-custom');
     confirmButtons.forEach(button => {
         if (button.textContent.includes('Confirmar Asistencia')) {
             button.addEventListener('click', function() {
                 this.textContent = 'Asistencia Confirmada';
-                this.classList.remove('btn-outline-primary');
+                this.classList.remove('btn-primary-custom');
                 this.classList.add('btn-success');
                 this.disabled = true;
                 
                 // Mostrar notificación de éxito
-                alert('¡Asistencia confirmada exitosamente!');
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success alert-dismissible fade show mt-3';
+                alertDiv.innerHTML = `
+                    <strong>¡Éxito!</strong> Tu asistencia ha sido confirmada correctamente.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                `;
+                this.closest('.session-card').appendChild(alertDiv);
             });
         }
     });
