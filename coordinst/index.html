@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coordinador Institucional - PIT Tutorías</title>
+<style>
+:root {
+    --primary-color: #0F6097;
+    --secondary-color: #50A6E1;
+    --accent-color: #A2D3F5;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--light-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0D4F7C 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0 5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 0.875rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+}
+
+.dropdown-header {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+.main-container {
+    flex: 1;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.me-3 {
+    margin-right: 1rem;
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.col-md-3, .col-md-6, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12, .col-6 {
+    padding: 0 15px;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-lg-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.col-lg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.g-4 {
+    margin: -15px;
+}
+
+.g-4 > * {
+    padding: 15px;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--dark-color);
+    line-height: 1.5;
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.stats-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    vertical-align: top;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Nuevos estilos */
+.quick-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.quick-action-btn:hover {
+    background-color: rgba(80, 166, 225, 0.1);
+}
+
+.badge-status {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-checkbox {
+    margin-right: 10px;
+}
+
+.task-text {
+    flex-grow: 1;
+}
+
+.task-priority {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.priority-high {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.priority-medium {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.priority-low {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-right: 40px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width: 100%;
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.progress-bar-custom {
+    background-color: var(--primary-color);
+}
+
+.status-pending {
+    color: var(--warning-color);
+    font-weight: 500;
+}
+
+.status-completed {
+    color: var(--success-color);
+    font-weight: 500;
+}
+
+.status-overdue {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* Estilos para el modal personalizado */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    overflow: auto;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 1.75rem auto;
+    max-width: 500px;
+}
+
+.modal-dialog.modal-lg {
+    max-width: 800px;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+    outline: 0;
+}
+
+.modal-header-custom {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0D4F7C 100%);
+    color: white;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
+
+.btn-close {
+    background: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-close:hover {
+    opacity: 0.75;
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.2rem;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0D4F7C;
+    border-color: #0D4F7C;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-success {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    background-color: transparent;
+}
+
+.btn-outline-success:hover {
+    color: white;
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-outline-warning {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+    background-color: transparent;
+}
+
+.btn-outline-warning:hover {
+    color: black;
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+    background-color: transparent;
+}
+
+.btn-outline-light:hover {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.badge.bg-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    transition: width 0.6s ease;
+}
+
+.progress-bar-custom {
+    background-color: var(--primary-color);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+}
+
+.form-select-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.form-label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+textarea.form-control {
+    min-height: calc(1.5em + 0.75rem + 2px);
+}
+
+.program-badge {
+    font-size: 0.75rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .filter-options {
+        justify-content: center;
+    }
+    
+    .search-box {
+        margin-bottom: 1rem;
+    }
+    
+    .col-md-3, .col-md-6, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12, .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar-nav {
+        margin-top: 1rem;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .nav-item {
+        margin: 0.25rem 0;
+    }
+    
+    .navbar-actions {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Iconos simulados */
+.bi::before {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+}
+
+.bi-mortarboard-fill::before { content: "🎓"; }
+.bi-bell-fill::before { content: "🔔"; }
+.bi-person-circle::before { content: "👤"; }
+.bi-lightning-fill::before { content: "⚡"; }
+.bi-search::before { content: "🔍"; }
+.bi-clipboard-data-fill::before { content: "📊"; }
+.bi-gear-fill::before { content: "⚙️"; }
+.bi-cash-coin::before { content: "💰"; }
+.bi-info-circle-fill::before { content: "ℹ️"; }
+.bi-diagram-3-fill::before { content: "🔗"; }
+.bi-graph-up-arrow::before { content: "📈"; }
+.bi-clock-history::before { content: "⏱️"; }
+.bi-eye::before { content: "👁️"; }
+.bi-download::before { content: "📥"; }
+.bi-pencil::before { content: "✏️"; }
+.bi-plus-circle::before { content: "➕"; }
+.bi-clipboard-plus-fill::before { content: "📋"; }
+.bi-cash-stack::before { content: "💵"; }
+.bi-file-bar-graph-fill::before { content: "📊"; }
+.bi-person::before { content: "👤"; }
+.bi-gear::before { content: "⚙️"; }
+.bi-box-arrow-right::before { content: "🚪"; }
+.bi-exclamation-triangle::before { content: "⚠️"; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-mortarboard-fill"></i>
+            PIT Tutorías
+        </a>
+        <div class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="/coordinador_institucional/">Coordinador Institucional</a>
+            </li>
+        </div>
+        <div class="navbar-actions">
+            <div class="dropdown">
+                <button class="btn btn-outline-light position-relative" type="button" id="notificationDropdown">
+                    <i class="bi bi-bell-fill"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="dropdown-menu" id="notificationMenu">
+                    <h6 class="dropdown-header">Notificaciones</h6>
+                    <a class="dropdown-item" href="#">2 diagnósticos pendientes de revisión</a>
+                    <a class="dropdown-item" href="#">Informe semestral de Ingeniería recibido</a>
+                    <a class="dropdown-item" href="#">Solicitud de recursos para el PIT</a>
+                    <a class="dropdown-item" href="#">Recordatorio: Evaluación semestral</a>
+                    <a class="dropdown-item" href="#">Nuevo reporte de coordinador departamental</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-center" href="#">Ver todas</a>
+                </div>
+            </div>
+            <div class="dropdown ms-3">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown">
+                    <i class="bi bi-person-circle me-1"></i> Coord. Institucional
+                </button>
+                <div class="dropdown-menu" id="userMenu">
+                    <a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Mi perfil</a>
+                    <a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configuración</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../index.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-container">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Panel del Coordinador Institucional de Tutoría</h2>
+            <div class="d-flex">
+                <div class="search-box me-3">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <i class="bi bi-search"></i>
+                </div>
+                <button class="btn btn-primary-custom" id="quickActionsBtn">
+                    <i class="bi bi-lightning-fill me-1"></i> Acciones rápidas
+                </button>
+            </div>
+        </div>
+
+        <!-- Tarjetas principales -->
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-clipboard-data-fill"></i></div>
+                    <h5 class="card-title">Diagnóstico Institucional</h5>
+                    <p class="card-text">
+                        Elabora el diagnóstico institucional de tutoría para la aplicación del Programa.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge bg-primary me-1">En Proceso</span>
+                        <span class="badge bg-success">75% Completado</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-2">Continuar Diagnóstico</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-gear-fill"></i></div>
+                    <h5 class="card-title">Sistematización de Procedimientos</h5>
+                    <p class="card-text">
+                        Sistematiza los procedimientos de promoción, operación y desarrollo del PIT.
+                    </p>
+                    <div class="progress mt-3" style="height: 8px;">
+                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">60% de procedimientos sistematizados</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-cash-coin"></i></div>
+                    <h5 class="card-title">Gestión de Recursos</h5>
+                    <p class="card-text">
+                        Gestiona ante las instancias internas los recursos necesarios para la operación del PIT.
+                    </p>
+                    <div class="mt-3">
+                        <span class="status-pending"><i class="bi bi-clock-history me-1"></i> 3 Solicitudes Pendientes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-info-circle-fill"></i></div>
+                    <h5 class="card-title">Gestión de Información</h5>
+                    <p class="card-text">
+                        Gestiona la información necesaria ante instancias internas y externas para los tutores.
+                    </p>
+                    <button class="btn btn-sm btn-outline-primary mt-2">Solicitar Información</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-diagram-3-fill"></i></div>
+                    <h5 class="card-title">Vinculación Externa</h5>
+                    <p class="card-text">
+                        Promueve la canalización interna y gestiona la vinculación externa para apoyo estudiantil.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge bg-info">5 Convenios Activos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                    <h5 class="card-title">Seguimiento del PIT</h5>
+                    <p class="card-text">
+                        Da seguimiento al avance del PIT en cada uno de los programas educativos.
+                    </p>
+                    <button class="btn btn-sm btn-outline-primary mt-2">Ver Avances</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estadísticas y gráficos -->
+        <div class="row mt-5 g-4">
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="stats-number">8</div>
+                    <div class="stats-label">Programas Educativos</div>
+                    <div class="mt-2">
+                        <span class="badge bg-success">6 Activos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="stats-number">42</div>
+                    <div class="stats-label">Tutores Registrados</div>
+                    <div class="mt-2">
+                        <span class="badge bg-info">5 Nuevos este semestre</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="stats-number">85%</div>
+                    <div class="stats-label">Avance del PIT</div>
+                    <div class="mt-2">
+                        <span class="badge bg-success">+10% vs anterior</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="stats-number">3</div>
+                    <div class="stats-label">Diagnósticos Pendientes</div>
+                    <div class="mt-2">
+                        <span class="badge bg-warning text-dark">Por revisar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos y tareas pendientes -->
+        <div class="row mt-5 g-4">
+            <div class="col-lg-8">
+                <div class="dashboard-card">
+                    <h5 class="card-title d-flex justify-content-between align-items-center">
+                        <span>Avance del PIT por Programa Educativo</span>
+                        <select class="form-select form-select-sm w-auto">
+                            <option>Semestre Actual</option>
+                            <option>Semestre Anterior</option>
+                            <option>Año Completo</option>
+                        </select>
+                    </h5>
+                    <div class="chart-container">
+                        <canvas id="programProgressChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="dashboard-card">
+                    <h5 class="card-title">Tareas Prioritarias</h5>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Revisar diagnóstico de Matemáticas</div>
+                            <span class="task-priority priority-high">Alta</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Integrar concentrado semestral</div>
+                            <span class="task-priority priority-high">Alta</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Gestionar recursos para capacitación</div>
+                            <span class="task-priority priority-medium">Media</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Evaluar PIT semestralmente</div>
+                            <span class="task-priority priority-medium">Media</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary w-100 mt-3">Ver todas las tareas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informes y diagnósticos -->
+        <div class="row mt-4 g-4">
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Diagnósticos por Programa</h5>
+                        <div class="filter-options">
+                            <button class="filter-btn active">Todos</button>
+                            <button class="filter-btn">Pendientes</button>
+                            <button class="filter-btn">Completados</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Fecha Envío</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ingeniería en Sistemas</td>
+                                    <td>15/01/2025</td>
+                                    <td><span class="status-completed">Completado</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Lic. en Matemáticas</td>
+                                    <td>18/01/2025</td>
+                                    <td><span class="status-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ingeniería Industrial</td>
+                                    <td>20/01/2025</td>
+                                    <td><span class="status-completed">Completado</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Informes Semestrales Recibidos</h5>
+                        <button class="btn btn-sm btn-primary-custom">Integrar Concentrado</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Coordinador</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ingeniería en Sistemas</td>
+                                    <td>Dr. Rodríguez</td>
+                                    <td>10/01/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Revisar</button>
+                                        <button class="btn btn-sm btn-outline-success">Aprobar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Lic. en Matemáticas</td>
+                                    <td>Dra. González</td>
+                                    <td>12/01/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Revisar</button>
+                                        <button class="btn btn-sm btn-outline-warning">Solicitar Ajustes</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ingeniería Industrial</td>
+                                    <td>Mtro. Hernández</td>
+                                    <td>15/01/2025</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Revisar</button>
+                                        <button class="btn btn-sm btn-outline-success">Aprobar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evaluación y seguimiento -->
+        <div class="row mt-4 g-4">
+            <div class="col-lg-12">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Evaluación Semestral del PIT</h5>
+                        <button class="btn btn-sm btn-primary-custom" id="evaluationModalBtn">
+                            <i class="bi bi-plus-circle me-1"></i> Nueva Evaluación
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Programa</th>
+                                    <th>Periodo</th>
+                                    <th>Metas Establecidas</th>
+                                    <th>Resultados Alcanzados</th>
+                                    <th>Análisis Comparativo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ingeniería en Sistemas</td>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>85%</td>
+                                    <td>92%</td>
+                                    <td><span class="badge bg-success">+7%</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Lic. en Matemáticas</td>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>80%</td>
+                                    <td>78%</td>
+                                    <td><span class="badge bg-warning text-dark">-2%</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ingeniería Industrial</td>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>75%</td>
+                                    <td>81%</td>
+                                    <td><span class="badge bg-success">+6%</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-warning"><i class="bi bi-pencil"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accesos rápidos -->
+        <div class="row mt-4 g-4">
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="diagnosticModalBtn">
+                    <i class="bi bi-clipboard-plus-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Nuevo Diagnóstico</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="resourcesModalBtn">
+                    <i class="bi bi-cash-stack" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Solicitar Recursos</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="consolidationModalBtn">
+                    <i class="bi bi-file-bar-graph-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Concentrado Semestral</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="evaluationModalBtn2">
+                    <i class="bi bi-graph-up-arrow" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Evaluación PIT</p>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    &copy; 2025 Programa Institucional de Tutorías - Instituto Tecnológico Matelunia
+</footer>
+
+<!-- Modal para acciones rápidas -->
+<div class="modal" id="quickActionsModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Acciones Rápidas - Coordinador Institucional</h5>
+                <button type="button" class="btn-close" id="quickActionsClose"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-clipboard-plus-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Iniciar Diagnóstico</h5>
+                                <p class="card-text">Elaborar diagnóstico institucional de tutoría</p>
+                                <button class="btn btn-primary-custom w-100" id="diagnosticFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-cash-stack text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Gestión de Recursos</h5>
+                                <p class="card-text">Solicitar recursos para operación del PIT</p>
+                                <button class="btn btn-primary-custom w-100" id="resourcesFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-bar-graph-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Concentrado Semestral</h5>
+                                <p class="card-text">Integrar concentrado por programa de estudio</p>
+                                <button class="btn btn-primary-custom w-100" id="consolidationFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-graph-up-arrow text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Evaluación PIT</h5>
+                                <p class="card-text">Evaluar semestralmente el PIT</p>
+                                <button class="btn btn-primary-custom w-100" id="evaluationFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para diagnóstico institucional -->
+<div class="modal" id="diagnosticModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Diagnóstico Institucional de Tutoría</h5>
+                <button type="button" class="btn-close" id="diagnosticClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="diagnosticProgram" class="form-label">Programa Educativo</label>
+                        <select class="form-select" id="diagnosticProgram" required>
+                            <option selected disabled>Seleccione un programa</option>
+                            <option>Ingeniería en Sistemas</option>
+                            <option>Licenciatura en Matemáticas</option>
+                            <option>Ingeniería Industrial</option>
+                            <option>Licenciatura en Física</option>
+                            <option>Ingeniería Química</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="diagnosticPeriod" class="form-label">Periodo</label>
+                        <select class="form-select" id="diagnosticPeriod" required>
+                            <option selected>Enero - Junio 2025</option>
+                            <option>Agosto - Diciembre 2024</option>
+                            <option>Enero - Junio 2024</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tutorsNumber" class="form-label">Número de Tutores</label>
+                        <input type="number" class="form-control" id="tutorsNumber" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="studentsNumber" class="form-label">Número de Estudiantes Atendidos</label>
+                        <input type="number" class="form-control" id="studentsNumber" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="diagnosticObservations" class="form-label">Observaciones</label>
+                        <textarea class="form-control" id="diagnosticObservations" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="diagnosticFile" class="form-label">Archivo de diagnóstico</label>
+                        <input class="form-control" type="file" id="diagnosticFile">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="diagnosticCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Guardar Diagnóstico</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para gestión de recursos -->
+<div class="modal" id="resourcesModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Solicitud de Recursos para el PIT</h5>
+                <button type="button" class="btn-close" id="resourcesClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="resourceType" class="form-label">Tipo de Recurso</label>
+                        <select class="form-select" id="resourceType" required>
+                            <option selected disabled>Seleccione un tipo</option>
+                            <option>Recursos Humanos</option>
+                            <option>Material Didáctico</option>
+                            <option>Equipo Tecnológico</option>
+                            <option>Espacios Físicos</option>
+                            <option>Capacitación</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resourceDescription" class="form-label">Descripción del Recurso</label>
+                        <textarea class="form-control" id="resourceDescription" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resourceJustification" class="form-label">Justificación</label>
+                        <textarea class="form-control" id="resourceJustification" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resourceAmount" class="form-label">Cantidad o Monto Estimado</label>
+                        <input type="text" class="form-control" id="resourceAmount" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="resourceUrgency" class="form-label">Urgencia</label>
+                        <select class="form-select" id="resourceUrgency" required>
+                            <option>Baja</option>
+                            <option>Media</option>
+                            <option selected>Alta</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="resourcesCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Enviar Solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para concentrado semestral -->
+<div class="modal" id="consolidationModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Concentrado Semestral de Acción Tutorial</h5>
+                <button type="button" class="btn-close" id="consolidationClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="consolidationPeriod" class="form-label">Periodo</label>
+                        <select class="form-select" id="consolidationPeriod" required>
+                            <option selected>Enero - Junio 2025</option>
+                            <option>Agosto - Diciembre 2024</option>
+                            <option>Enero - Junio 2024</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Programas a Incluir</label>
+                        <div>
+                            <span class="program-badge badge bg-primary">Ingeniería en Sistemas <input type="checkbox" checked class="ms-1"></span>
+                            <span class="program-badge badge bg-primary">Lic. en Matemáticas <input type="checkbox" checked class="ms-1"></span>
+                            <span class="program-badge badge bg-primary">Ingeniería Industrial <input type="checkbox" checked class="ms-1"></span>
+                            <span class="program-badge badge bg-primary">Lic. en Física <input type="checkbox" class="ms-1"></span>
+                            <span class="program-badge badge bg-primary">Ingeniería Química <input type="checkbox" class="ms-1"></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="consolidationFormat" class="form-label">Formato de Salida</label>
+                        <select class="form-select" id="consolidationFormat" required>
+                            <option>PDF</option>
+                            <option selected>Excel</option>
+                            <option>Word</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="consolidationObservations" class="form-label">Observaciones Generales</label>
+                        <textarea class="form-control" id="consolidationObservations" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="consolidationCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Generar Concentrado</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para evaluación PIT -->
+<div class="modal" id="evaluationModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Evaluación Semestral del PIT</h5>
+                <button type="button" class="btn-close" id="evaluationClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="evaluationProgram" class="form-label">Programa Educativo</label>
+                        <select class="form-select" id="evaluationProgram" required>
+                            <option selected disabled>Seleccione un programa</option>
+                            <option>Ingeniería en Sistemas</option>
+                            <option>Licenciatura en Matemáticas</option>
+                            <option>Ingeniería Industrial</option>
+                            <option>Licenciatura en Física</option>
+                            <option>Ingeniería Química</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="evaluationPeriod" class="form-label">Periodo</label>
+                        <select class="form-select" id="evaluationPeriod" required>
+                            <option selected>Enero - Junio 2025</option>
+                            <option>Agosto - Diciembre 2024</option>
+                            <option>Enero - Junio 2024</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="establishedGoals" class="form-label">Metas Establecidas (%)</label>
+                                <input type="number" class="form-control" id="establishedGoals" min="0" max="100" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="achievedResults" class="form-label">Resultados Alcanzados (%)</label>
+                                <input type="number" class="form-control" id="achievedResults" min="0" max="100" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comparativeAnalysis" class="form-label">Análisis Comparativo</label>
+                        <textarea class="form-control" id="comparativeAnalysis" rows="3" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="improvementActions" class="form-label">Acciones de Mejora</label>
+                        <textarea class="form-control" id="improvementActions" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="evaluationFile" class="form-label">Archivo de evaluación</label>
+                        <input class="form-control" type="file" id="evaluationFile">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="evaluationCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Guardar Evaluación</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Funcionalidad para los dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown de notificaciones
+    const notificationDropdown = document.getElementById('notificationDropdown');
+    const notificationMenu = document.getElementById('notificationMenu');
+    
+    notificationDropdown.addEventListener('click', function() {
+        notificationMenu.classList.toggle('show');
+    });
+    
+    // Dropdown de usuario
+    const userDropdown = document.getElementById('userDropdown');
+    const userMenu = document.getElementById('userMenu');
+    
+    userDropdown.addEventListener('click', function() {
+        userMenu.classList.toggle('show');
+    });
+    
+    // Cerrar dropdowns al hacer clic fuera de ellos
+    document.addEventListener('click', function(event) {
+        if (!notificationDropdown.contains(event.target) && !notificationMenu.contains(event.target)) {
+            notificationMenu.classList.remove('show');
+        }
+        
+        if (!userDropdown.contains(event.target) && !userMenu.contains(event.target)) {
+            userMenu.classList.remove('show');
+        }
+    });
+    
+    // Funcionalidad para las tareas pendientes
+    const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+    taskCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const taskItem = this.closest('.task-item');
+            if (this.checked) {
+                taskItem.style.opacity = '0.6';
+                taskItem.style.textDecoration = 'line-through';
+            } else {
+                taskItem.style.opacity = '1';
+                taskItem.style.textDecoration = 'none';
+            }
+        });
+    });
+    
+    // Funcionalidad para los filtros
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            // Aquí iría la lógica para filtrar la tabla
+        });
+    });
+    
+    // Simulación de búsqueda
+    const searchInput = document.querySelector('.search-box input');
+    searchInput.addEventListener('input', function() {
+        // Aquí iría la lógica para buscar en el contenido
+        console.log('Buscando:', this.value);
+    });
+    
+    // Funcionalidad para los modales
+    const modals = {
+        quickActions: document.getElementById('quickActionsModal'),
+        diagnostic: document.getElementById('diagnosticModal'),
+        resources: document.getElementById('resourcesModal'),
+        consolidation: document.getElementById('consolidationModal'),
+        evaluation: document.getElementById('evaluationModal')
+    };
+    
+    // Botones para abrir modales
+    document.getElementById('quickActionsBtn').addEventListener('click', function() {
+        modals.quickActions.classList.add('show');
+    });
+    
+    document.getElementById('diagnosticModalBtn').addEventListener('click', function() {
+        modals.diagnostic.classList.add('show');
+    });
+    
+    document.getElementById('resourcesModalBtn').addEventListener('click', function() {
+        modals.resources.classList.add('show');
+    });
+    
+    document.getElementById('consolidationModalBtn').addEventListener('click', function() {
+        modals.consolidation.classList.add('show');
+    });
+    
+    document.getElementById('evaluationModalBtn').addEventListener('click', function() {
+        modals.evaluation.classList.add('show');
+    });
+    
+    document.getElementById('evaluationModalBtn2').addEventListener('click', function() {
+        modals.evaluation.classList.add('show');
+    });
+    
+    // Botones para cerrar modales
+    document.getElementById('quickActionsClose').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+    });
+    
+    document.getElementById('diagnosticClose').addEventListener('click', function() {
+        modals.diagnostic.classList.remove('show');
+    });
+    
+    document.getElementById('resourcesClose').addEventListener('click', function() {
+        modals.resources.classList.remove('show');
+    });
+    
+    document.getElementById('consolidationClose').addEventListener('click', function() {
+        modals.consolidation.classList.remove('show');
+    });
+    
+    document.getElementById('evaluationClose').addEventListener('click', function() {
+        modals.evaluation.classList.remove('show');
+    });
+    
+    // Botones de cancelar en modales
+    document.getElementById('diagnosticCancel').addEventListener('click', function() {
+        modals.diagnostic.classList.remove('show');
+    });
+    
+    document.getElementById('resourcesCancel').addEventListener('click', function() {
+        modals.resources.classList.remove('show');
+    });
+    
+    document.getElementById('consolidationCancel').addEventListener('click', function() {
+        modals.consolidation.classList.remove('show');
+    });
+    
+    document.getElementById('evaluationCancel').addEventListener('click', function() {
+        modals.evaluation.classList.remove('show');
+    });
+    
+    // Botones de acciones rápidas dentro del modal
+    document.getElementById('diagnosticFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.diagnostic.classList.add('show');
+    });
+    
+    document.getElementById('resourcesFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.resources.classList.add('show');
+    });
+    
+    document.getElementById('consolidationFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.consolidation.classList.add('show');
+    });
+    
+    document.getElementById('evaluationFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.evaluation.classList.add('show');
+    });
+    
+    // Cerrar modales al hacer clic fuera de ellos
+    window.addEventListener('click', function(event) {
+        for (const key in modals) {
+            if (modals[key].contains(event.target) && event.target === modals[key]) {
+                modals[key].classList.remove('show');
+            }
+        }
+    });
+    
+    // Gráfico de avance por programa (simulado)
+    const chartContainer = document.getElementById('programProgressChart');
+    if (chartContainer) {
+        // Aquí iría la lógica para crear el gráfico con una biblioteca como Chart.js
+        // Por ahora, solo mostraremos un mensaje
+        chartContainer.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#666;">Gráfico de avance del PIT por programa educativo</div>';
+    }
+});
+</script>
+</body>
+</html>

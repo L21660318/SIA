@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Académico - PIT Tutorías</title>
+<style>
+:root {
+    --primary-color: #0F6097;
+    --secondary-color: #50A6E1;
+    --accent-color: #A2D3F5;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--light-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.navbar {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0D4F7C 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.8rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-brand i {
+    margin-right: 10px;
+    font-size: 1.6rem;
+}
+
+.navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin: 0 5px;
+}
+
+.nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.nav-link:hover, .nav-link.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 0.875rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid #e9ecef;
+}
+
+.dropdown-header {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    color: #6c757d;
+    white-space: nowrap;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+.main-container {
+    flex: 1;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.me-3 {
+    margin-right: 1rem;
+}
+
+.ms-3 {
+    margin-left: 1rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.mt-3 {
+    margin-top: 1rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.mt-5 {
+    margin-top: 3rem;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px;
+}
+
+.col-md-3, .col-md-6, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12, .col-6 {
+    padding: 0 15px;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
+.col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-lg-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+
+.col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+}
+
+.col-lg-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.g-4 {
+    margin: -15px;
+}
+
+.g-4 > * {
+    padding: 15px;
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    border: none;
+    overflow: hidden;
+    padding: 1.5rem;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.card-text {
+    color: var(--dark-color);
+    line-height: 1.5;
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-color);
+}
+
+.stats-label {
+    color: #333;
+    font-weight: 500;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    text-align: center;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody tr {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table tbody td {
+    padding: 0.75rem;
+    vertical-align: top;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Nuevos estilos */
+.quick-action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 1.5rem;
+}
+
+.quick-action-btn:hover {
+    background-color: rgba(80, 166, 225, 0.1);
+}
+
+.badge-status {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 250px;
+    width: 100%;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-checkbox {
+    margin-right: 10px;
+}
+
+.task-text {
+    flex-grow: 1;
+}
+
+.task-priority {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.priority-high {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.priority-medium {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.priority-low {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    padding-right: 40px;
+    padding: 0.375rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    width: 100%;
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+.filter-options {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.progress-bar-custom {
+    background-color: var(--primary-color);
+}
+
+.status-pending {
+    color: var(--warning-color);
+    font-weight: 500;
+}
+
+.status-completed {
+    color: var(--success-color);
+    font-weight: 500;
+}
+
+.status-overdue {
+    color: var(--danger-color);
+    font-weight: 500;
+}
+
+/* Estilos para el modal personalizado */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+    overflow: auto;
+}
+
+.modal.show {
+    display: block;
+}
+
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 1.75rem auto;
+    max-width: 500px;
+}
+
+.modal-dialog.modal-lg {
+    max-width: 800px;
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+    outline: 0;
+}
+
+.modal-header-custom {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #0D4F7C 100%);
+    color: white;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+}
+
+.btn-close {
+    background: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    cursor: pointer;
+    color: white;
+}
+
+.btn-close:hover {
+    opacity: 0.75;
+}
+
+.modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    border-radius: 0.2rem;
+}
+
+.btn-primary-custom {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary-custom:hover {
+    background-color: #0D4F7C;
+    border-color: #0D4F7C;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+    color: white;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-success {
+    color: var(--success-color);
+    border-color: var(--success-color);
+    background-color: transparent;
+}
+
+.btn-outline-success:hover {
+    color: white;
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-outline-warning {
+    color: var(--warning-color);
+    border-color: var(--warning-color);
+    background-color: transparent;
+}
+
+.btn-outline-warning:hover {
+    color: black;
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+}
+
+.btn-outline-danger {
+    color: var(--danger-color);
+    border-color: var(--danger-color);
+    background-color: transparent;
+}
+
+.btn-outline-danger:hover {
+    color: white;
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+    background-color: transparent;
+}
+
+.btn-outline-light:hover {
+    color: #212529;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #6c757d;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 0.75em;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.badge.bg-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color);
+    color: black;
+}
+
+.badge.bg-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.badge.bg-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.progress {
+    display: flex;
+    height: 8px;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    transition: width 0.6s ease;
+}
+
+.progress-bar-custom {
+    background-color: var(--primary-color);
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-control-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.form-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    appearance: none;
+}
+
+.form-select-sm {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.form-label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+textarea.form-control {
+    min-height: calc(1.5em + 0.75rem + 2px);
+}
+
+.program-badge {
+    font-size: 0.75rem;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.support-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.academic-info {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 1rem;
+    }
+    
+    .filter-options {
+        justify-content: center;
+    }
+    
+    .search-box {
+        margin-bottom: 1rem;
+    }
+    
+    .col-md-3, .col-md-6, .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12, .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+    
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar-nav {
+        margin-top: 1rem;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .nav-item {
+        margin: 0.25rem 0;
+    }
+    
+    .navbar-actions {
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+/* Iconos simulados */
+.bi::before {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+}
+
+.bi-mortarboard-fill::before { content: "🎓"; }
+.bi-bell-fill::before { content: "🔔"; }
+.bi-person-circle::before { content: "👤"; }
+.bi-lightning-fill::before { content: "⚡"; }
+.bi-search::before { content: "🔍"; }
+.bi-file-check-fill::before { content: "📋✅"; }
+.bi-bar-chart-line-fill::before { content: "📊"; }
+.bi-hand-thumbs-up-fill::before { content: "👍"; }
+.bi-people-fill::before { content: "👥"; }
+.bi-eye::before { content: "👁️"; }
+.bi-download::before { content: "📥"; }
+.bi-pencil::before { content: "✏️"; }
+.bi-plus-circle::before { content: "➕"; }
+.bi-person::before { content: "👤"; }
+.bi-gear::before { content: "⚙️"; }
+.bi-box-arrow-right::before { content: "🚪"; }
+.bi-exclamation-triangle::before { content: "⚠️"; }
+.bi-check-circle-fill::before { content: "✅"; }
+.bi-clock-history::before { content: "⏱️"; }
+.bi-cash-stack::before { content: "💵"; }
+.bi-building::before { content: "🏢"; }
+.bi-envelope-fill::before { content: "✉️"; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a class="navbar-brand" href="/">
+            <i class="bi bi-mortarboard-fill"></i>
+            PIT Tutorías
+        </a>
+        <div class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="/academic/">Académico</a>
+            </li>
+        </div>
+        <div class="navbar-actions">
+            <div class="dropdown">
+                <button class="btn btn-outline-light position-relative" type="button" id="notificationDropdown">
+                    <i class="bi bi-bell-fill"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="dropdown-menu" id="notificationMenu">
+                    <h6 class="dropdown-header">Notificaciones</h6>
+                    <a class="dropdown-item" href="#">5 constancias pendientes de validación</a>
+                    <a class="dropdown-item" href="#">Informe semestral recibido</a>
+                    <a class="dropdown-item" href="#">Solicitud de apoyo institucional</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-center" href="#">Ver todas</a>
+                </div>
+            </div>
+            <div class="dropdown ms-3">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown">
+                    <i class="bi bi-person-circle me-1"></i> Académico
+                </button>
+                <div class="dropdown-menu" id="userMenu">
+                    <a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Mi perfil</a>
+                    <a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Configuración</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="../index.html"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="main-container">
+    <div class="container">
+        <div class="academic-info">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="mb-1">Departamento de Desarrollo Académico</h3>
+                    <p class="mb-0">Responsable: Mtro. Roberto Sánchez</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge bg-light text-primary fs-6">Semestre: Enero - Junio 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Panel Académico</h2>
+            <div class="d-flex">
+                <div class="search-box me-3">
+                    <input type="text" class="form-control" placeholder="Buscar...">
+                    <i class="bi bi-search"></i>
+                </div>
+                <button class="btn btn-primary-custom" id="quickActionsBtn">
+                    <i class="bi bi-lightning-fill me-1"></i> Acciones rápidas
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Dashboard -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="card-icon"><i class="bi bi-file-check-fill"></i></div>
+                    <h3 class="stats-number">12</h3>
+                    <p class="stats-label">Constancias Validadas</p>
+                    <div class="mt-2">
+                        <span class="badge bg-success">5 Pendientes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="card-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+                    <h3 class="stats-number">5</h3>
+                    <p class="stats-label">Informes Recibidos</p>
+                    <div class="mt-2">
+                        <span class="badge bg-info">2 Por enviar</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="card-icon"><i class="bi bi-hand-thumbs-up-fill"></i></div>
+                    <h3 class="stats-number">8</h3>
+                    <p class="stats-label">Apoyos Gestionados</p>
+                    <div class="mt-2">
+                        <span class="badge bg-warning">3 En proceso</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="dashboard-card text-center">
+                    <div class="card-icon"><i class="bi bi-people-fill"></i></div>
+                    <h3 class="stats-number">3</h3>
+                    <p class="stats-label">Reuniones Programadas</p>
+                    <div class="mt-2">
+                        <span class="badge bg-primary">Próxima: 25/10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tarjetas de Funciones -->
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-hand-thumbs-up-fill"></i></div>
+                    <h5 class="card-title">Gestión de Apoyos</h5>
+                    <p class="card-text">
+                        Gestiona ante las instancias institucionales e interinstitucionales los apoyos necesarios para el trabajo tutorial, mediante mecanismos de vinculación.
+                    </p>
+                    <div class="mt-3">
+                        <span class="badge bg-primary me-1">5 Convenios</span>
+                        <span class="badge bg-success">3 Activos</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary mt-2">Gestionar Apoyos</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-file-check-fill"></i></div>
+                    <h5 class="card-title">Validación de Constancias</h5>
+                    <p class="card-text">
+                        Valida las constancias de cumplimiento de los tutores expedidas por el (la) Jefe(a) de Desarrollo Académico o su equivalente al final del semestre.
+                    </p>
+                    <div class="progress mt-3" style="height: 8px;">
+                        <div class="progress-bar progress-bar-custom" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small class="text-muted">70% de constancias validadas</small>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="dashboard-card">
+                    <div class="card-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+                    <h5 class="card-title">Informe Semestral</h5>
+                    <p class="card-text">
+                        Recibe del (de la) Jefe(a) de Desarrollo Académico un informe ejecutivo semestral sobre los resultados del PIT y lo envía al(a la) Director(a) del Instituto.
+                    </p>
+                    <div class="mt-3">
+                        <span class="status-pending"><i class="bi bi-clock-history me-1"></i> 2 Informes Pendientes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de constancias -->
+        <div class="row mt-5 g-4">
+            <div class="col-lg-8">
+                <div class="dashboard-card">
+                    <h5 class="card-title d-flex justify-content-between align-items-center">
+                        <span>Constancias Pendientes de Validación</span>
+                        <select class="form-select form-select-sm w-auto">
+                            <option>Todas</option>
+                            <option>Pendientes</option>
+                            <option>Validadas</option>
+                        </select>
+                    </h5>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tutor</th>
+                                    <th>Departamento</th>
+                                    <th>Fecha Solicitud</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Dr. Juan Pérez</td>
+                                    <td>Matemáticas</td>
+                                    <td>15/01/2025</td>
+                                    <td><span class="status-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-success">Validar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Dra. Ana García</td>
+                                    <td>Física</td>
+                                    <td>18/01/2025</td>
+                                    <td><span class="status-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-success">Validar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mtro. Carlos López</td>
+                                    <td>Química</td>
+                                    <td>20/01/2025</td>
+                                    <td><span class="status-completed">Validada</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="dashboard-card">
+                    <h5 class="card-title">Tareas Prioritarias</h5>
+                    <div class="task-list">
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Validar constancias pendientes</div>
+                            <span class="task-priority priority-high">Alta</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Revisar informe semestral</div>
+                            <span class="task-priority priority-high">Alta</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Gestionar apoyo para capacitación</div>
+                            <span class="task-priority priority-medium">Media</span>
+                        </div>
+                        <div class="task-item">
+                            <input type="checkbox" class="task-checkbox">
+                            <div class="task-text">Programar reunión con coordinadores</div>
+                            <span class="task-priority priority-medium">Media</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-primary w-100 mt-3">Ver todas las tareas</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestión de apoyos e informes -->
+        <div class="row mt-4 g-4">
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Apoyos Gestionados</h5>
+                        <button class="btn btn-sm btn-primary-custom" id="supportModalBtn">
+                            <i class="bi bi-plus-circle me-1"></i> Nuevo Apoyo
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Institución</th>
+                                    <th>Tipo de Apoyo</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Universidad Nacional</td>
+                                    <td>Capacitación</td>
+                                    <td><span class="status-completed">Activo</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-warning">Renovar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Empresa TechSolutions</td>
+                                    <td>Equipamiento</td>
+                                    <td><span class="status-pending">En proceso</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-success">Seguimiento</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Gobierno Estatal</td>
+                                    <td>Recursos económicos</td>
+                                    <td><span class="status-completed">Activo</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-warning">Renovar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="dashboard-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="card-title mb-0">Informes Semestrales</h5>
+                        <button class="btn btn-sm btn-primary-custom" id="reportModalBtn">
+                            <i class="bi bi-plus-circle me-1"></i> Nuevo Informe
+                        </button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Periodo</th>
+                                    <th>Departamento</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>Matemáticas</td>
+                                    <td><span class="status-completed">Enviado</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>Física</td>
+                                    <td><span class="status-pending">Pendiente</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-warning">Solicitar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Ene-Jun 2025</td>
+                                    <td>Química</td>
+                                    <td><span class="status-completed">Enviado</span></td>
+                                    <td>
+                                        <button class="btn btn-sm btn-outline-primary">Ver</button>
+                                        <button class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accesos rápidos -->
+        <div class="row mt-4 g-4">
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="certificateValidationBtn">
+                    <i class="bi bi-file-check-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Validar Constancias</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="supportManagementBtn">
+                    <i class="bi bi-hand-thumbs-up-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Gestionar Apoyos</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="reportManagementBtn">
+                    <i class="bi bi-bar-chart-line-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Informes Semestrales</p>
+                </button>
+            </div>
+            <div class="col-md-3 col-6">
+                <button class="quick-action-btn dashboard-card" id="meetingManagementBtn">
+                    <i class="bi bi-people-fill" style="font-size:2rem;color:var(--primary-color)"></i>
+                    <p class="mt-2">Reuniones</p>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    &copy; 2025 Programa Institucional de Tutorías - Instituto Tecnológico Matelunia
+</footer>
+
+<!-- Modal para acciones rápidas -->
+<div class="modal" id="quickActionsModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Acciones Rápidas - Académico</h5>
+                <button type="button" class="btn-close" id="quickActionsClose"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-file-check-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Validar Constancias</h5>
+                                <p class="card-text">Validar constancias de cumplimiento de tutores</p>
+                                <button class="btn btn-primary-custom w-100" id="certificateFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-hand-thumbs-up-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Gestión de Apoyos</h5>
+                                <p class="card-text">Gestionar apoyos institucionales para tutorías</p>
+                                <button class="btn btn-primary-custom w-100" id="supportFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-bar-chart-line-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Informe Semestral</h5>
+                                <p class="card-text">Gestionar informe ejecutivo semestral</p>
+                                <button class="btn btn-primary-custom w-100" id="reportFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-people-fill text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="card-title mt-2">Reuniones</h5>
+                                <p class="card-text">Programar reuniones con departamentos</p>
+                                <button class="btn btn-primary-custom w-100" id="meetingFromQuickActions">Continuar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para validación de constancias -->
+<div class="modal" id="certificateValidationModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Validación de Constancias de Tutores</h5>
+                <button type="button" class="btn-close" id="certificateValidationClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="certificateTutor" class="form-label">Tutor</label>
+                        <select class="form-select" id="certificateTutor">
+                            <option selected disabled>Seleccione un tutor</option>
+                            <option>Dr. Juan Pérez - Matemáticas</option>
+                            <option>Dra. Ana García - Física</option>
+                            <option>Mtro. Carlos López - Química</option>
+                            <option>Dra. Sofía Ramírez - Física</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificatePeriod" class="form-label">Periodo</label>
+                        <select class="form-select" id="certificatePeriod">
+                            <option selected>Enero - Junio 2025</option>
+                            <option>Agosto - Diciembre 2024</option>
+                            <option>Enero - Junio 2024</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificateActivities" class="form-label">Actividades Realizadas</label>
+                        <textarea class="form-control" id="certificateActivities" rows="3" placeholder="Describa las actividades realizadas por el tutor..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificateResults" class="form-label">Resultados Alcanzados</label>
+                        <textarea class="form-control" id="certificateResults" rows="3" placeholder="Describa los resultados alcanzados..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="certificateFile" class="form-label">Constancia Adjunta</label>
+                        <input class="form-control" type="file" id="certificateFile">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="certificateValidation">
+                        <label class="form-check-label" for="certificateValidation">
+                            Validar constancia
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="certificateValidationCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Guardar Validación</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para gestión de apoyos -->
+<div class="modal" id="supportModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Gestión de Apoyos Institucionales</h5>
+                <button type="button" class="btn-close" id="supportClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="supportInstitution" class="form-label">Institución</label>
+                        <input type="text" class="form-control" id="supportInstitution" placeholder="Nombre de la institución">
+                    </div>
+                    <div class="mb-3">
+                        <label for="supportType" class="form-label">Tipo de Apoyo</label>
+                        <select class="form-select" id="supportType">
+                            <option selected disabled>Seleccione un tipo</option>
+                            <option>Capacitación</option>
+                            <option>Equipamiento</option>
+                            <option>Recursos económicos</option>
+                            <option>Espacios físicos</option>
+                            <option>Material didáctico</option>
+                            <option>Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="supportDescription" class="form-label">Descripción del Apoyo</label>
+                        <textarea class="form-control" id="supportDescription" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="supportJustification" class="form-label">Justificación</label>
+                        <textarea class="form-control" id="supportJustification" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="supportStatus" class="form-label">Estado</label>
+                        <select class="form-select" id="supportStatus">
+                            <option>En gestión</option>
+                            <option>Activo</option>
+                            <option>Finalizado</option>
+                            <option>Renovación pendiente</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="supportCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Guardar Apoyo</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para informes semestrales -->
+<div class="modal" id="reportModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom">
+                <h5 class="modal-title">Gestión de Informe Semestral</h5>
+                <button type="button" class="btn-close" id="reportClose"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="reportPeriod" class="form-label">Periodo</label>
+                        <select class="form-select" id="reportPeriod">
+                            <option selected>Enero - Junio 2025</option>
+                            <option>Agosto - Diciembre 2024</option>
+                            <option>Enero - Junio 2024</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportDepartment" class="form-label">Departamento</label>
+                        <select class="form-select" id="reportDepartment">
+                            <option selected>Todos los departamentos</option>
+                            <option>Matemáticas</option>
+                            <option>Física</option>
+                            <option>Química</option>
+                            <option>Biología</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportObjectives" class="form-label">Objetivos Cumplidos</label>
+                        <textarea class="form-control" id="reportObjectives" rows="3" placeholder="Describa los objetivos cumplidos..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportResults" class="form-label">Resultados Obtenidos</label>
+                        <textarea class="form-control" id="reportResults" rows="3" placeholder="Describa los resultados obtenidos..."></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reportFile" class="form-label">Archivo del Informe</label>
+                        <input class="form-control" type="file" id="reportFile">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="reportSent">
+                        <label class="form-check-label" for="reportSent">
+                            Enviado a Dirección
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="reportCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary-custom">Guardar Informe</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Funcionalidad para los dropdowns
+document.addEventListener('DOMContentLoaded', function() {
+    // Dropdown de notificaciones
+    const notificationDropdown = document.getElementById('notificationDropdown');
+    const notificationMenu = document.getElementById('notificationMenu');
+    
+    notificationDropdown.addEventListener('click', function() {
+        notificationMenu.classList.toggle('show');
+    });
+    
+    // Dropdown de usuario
+    const userDropdown = document.getElementById('userDropdown');
+    const userMenu = document.getElementById('userMenu');
+    
+    userDropdown.addEventListener('click', function() {
+        userMenu.classList.toggle('show');
+    });
+    
+    // Cerrar dropdowns al hacer clic fuera de ellos
+    document.addEventListener('click', function(event) {
+        if (!notificationDropdown.contains(event.target) && !notificationMenu.contains(event.target)) {
+            notificationMenu.classList.remove('show');
+        }
+        
+        if (!userDropdown.contains(event.target) && !userMenu.contains(event.target)) {
+            userMenu.classList.remove('show');
+        }
+    });
+    
+    // Funcionalidad para las tareas pendientes
+    const taskCheckboxes = document.querySelectorAll('.task-checkbox');
+    taskCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const taskItem = this.closest('.task-item');
+            if (this.checked) {
+                taskItem.style.opacity = '0.6';
+                taskItem.style.textDecoration = 'line-through';
+            } else {
+                taskItem.style.opacity = '1';
+                taskItem.style.textDecoration = 'none';
+            }
+        });
+    });
+    
+    // Simulación de búsqueda
+    const searchInput = document.querySelector('.search-box input');
+    searchInput.addEventListener('input', function() {
+        // Aquí iría la lógica para buscar en el contenido
+        console.log('Buscando:', this.value);
+    });
+    
+    // Funcionalidad para los modales
+    const modals = {
+        quickActions: document.getElementById('quickActionsModal'),
+        certificateValidation: document.getElementById('certificateValidationModal'),
+        support: document.getElementById('supportModal'),
+        report: document.getElementById('reportModal')
+    };
+    
+    // Botones para abrir modales
+    document.getElementById('quickActionsBtn').addEventListener('click', function() {
+        modals.quickActions.classList.add('show');
+    });
+    
+    document.getElementById('certificateValidationBtn').addEventListener('click', function() {
+        modals.certificateValidation.classList.add('show');
+    });
+    
+    document.getElementById('supportManagementBtn').addEventListener('click', function() {
+        modals.support.classList.add('show');
+    });
+    
+    document.getElementById('supportModalBtn').addEventListener('click', function() {
+        modals.support.classList.add('show');
+    });
+    
+    document.getElementById('reportManagementBtn').addEventListener('click', function() {
+        modals.report.classList.add('show');
+    });
+    
+    document.getElementById('reportModalBtn').addEventListener('click', function() {
+        modals.report.classList.add('show');
+    });
+    
+    // Botones para cerrar modales
+    document.getElementById('quickActionsClose').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+    });
+    
+    document.getElementById('certificateValidationClose').addEventListener('click', function() {
+        modals.certificateValidation.classList.remove('show');
+    });
+    
+    document.getElementById('supportClose').addEventListener('click', function() {
+        modals.support.classList.remove('show');
+    });
+    
+    document.getElementById('reportClose').addEventListener('click', function() {
+        modals.report.classList.remove('show');
+    });
+    
+    // Botones de cancelar en modales
+    document.getElementById('certificateValidationCancel').addEventListener('click', function() {
+        modals.certificateValidation.classList.remove('show');
+    });
+    
+    document.getElementById('supportCancel').addEventListener('click', function() {
+        modals.support.classList.remove('show');
+    });
+    
+    document.getElementById('reportCancel').addEventListener('click', function() {
+        modals.report.classList.remove('show');
+    });
+    
+    // Botones de acciones rápidas dentro del modal
+    document.getElementById('certificateFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.certificateValidation.classList.add('show');
+    });
+    
+    document.getElementById('supportFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.support.classList.add('show');
+    });
+    
+    document.getElementById('reportFromQuickActions').addEventListener('click', function() {
+        modals.quickActions.classList.remove('show');
+        modals.report.classList.add('show');
+    });
+    
+    // Cerrar modales al hacer clic fuera de ellos
+    window.addEventListener('click', function(event) {
+        for (const key in modals) {
+            if (modals[key].contains(event.target) && event.target === modals[key]) {
+                modals[key].classList.remove('show');
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
